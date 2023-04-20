@@ -1,5 +1,6 @@
 from dotenv import dotenv_values
 from flask import Flask
+from flask_migrate import Migrate
 
 
 def create_app():
@@ -14,8 +15,9 @@ def create_app():
     def hello():
         return 'Hello this is your Budget Buddy!!'
 
-    # from .models import Users
-    # Users.db.init_app(app)
+    from . import models
+    models.db.init_app(app)
+    migrate = Migrate(app, models.db)
 
     from . import users_controller
     app.register_blueprint(users_controller.bp)

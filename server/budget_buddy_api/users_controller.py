@@ -1,5 +1,5 @@
 from flask import (Blueprint, request, redirect)
-from . import Users_model
+from . import models
 
 bp = Blueprint(
     'users',
