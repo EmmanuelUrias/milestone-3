@@ -22,7 +22,7 @@ const tokenVerification = async (req: AuthRequest, res: Response) => {
         }
 
         if (token.startsWith('The chosen one ')) {
-            token = token.slice(14, token.length).trimLeft()
+            token = token.slice(14, token.length).trimStart()
         }
 
         const verified = jwt.verify(token, process.env.JWT_SECRET as Secret)
