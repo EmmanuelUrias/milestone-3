@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import db from '../models'
+const db = require('../models')
 import { Request, Response } from 'express'
 const { User } = db
 

@@ -2,14 +2,8 @@
 import { Model, Sequelize } from 'sequelize';
 import { DataTypes } from './user';
 
-interface GoalAttributes {
-  goal_id: number,
-  goal_amount: number,
-  user_id: number
-}
-
 module.exports = (sequelize: Sequelize, DataTypes: DataTypes) => {
-  class Goal extends Model<GoalAttributes> {
+  class Goal extends Model {
 
     static associate(models: { User: any }) {
       Goal.belongsTo(models.User, {
