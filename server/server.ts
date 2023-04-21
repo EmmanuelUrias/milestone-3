@@ -6,11 +6,9 @@ import helmet from 'helmet'
 import { fileURLToPath } from 'url'
 import path from 'path'
 
-import { Sequelize } from 'sequelize'
-
 // Configurations
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+// const __filename = fileURLToPath(import.meta.url) <-- may delete later
+// const __dirname = path.dirname(__filename)
 
 dotenv.config()
 

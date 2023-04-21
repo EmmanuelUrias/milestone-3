@@ -1,16 +1,11 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
+import { Model, Sequelize } from 'sequelize';
+import { DataTypes } from './user';
+
+module.exports = (sequelize: Sequelize, DataTypes: DataTypes) => {
   class Expense extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate({User}) {
-      Expense.belongsTo(User, {
+    static associate(models: { User: any }) {
+      Expense.belongsTo(models.User, {
         foreignKey: 'user_id',
         as: 'user'
       })

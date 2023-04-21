@@ -1,11 +1,12 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import db from '../models'
+import { Request, Response } from 'express'
 const { User } = db
 
 
 // Register
-export const register = async (req, res) => {
+export const register = async (req: Request, res: Response) => {
     try {
         const {
             username,
