@@ -1,14 +1,16 @@
-from dotenv import dotenv_values
+from dotenv import load_dotenv
 from flask import Flask
 from flask_migrate import Migrate
+import os
 
 
 def create_app():
     app = Flask(__name__)
 
-    URI = dotenv_values('.env')
+    load_dotenv()
+    DATABASE_URI = os.getenv('DATABASE_URI')
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'{URI}'
+    app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     @app.route('/')
@@ -21,8 +23,5 @@ def create_app():
 
     from . import users_controller
     app.register_blueprint(users_controller.bp)
-
-    if __name__ == '__main__':
-        app.run()
 
     return app
