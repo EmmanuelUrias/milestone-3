@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt'
 import jwt, { Secret } from 'jsonwebtoken'
-const db = require('../models')
+const db = require('../models/user')
 import { Request, Response } from 'express'
 const { User } = db
 
@@ -12,30 +12,27 @@ export const register = async (req: Request, res: Response) => {
             username,
             password,
             email,
-            budget,
-            time_stamp
-        } = req.body
+            budget
+            } = req.body
 
         const salt = await bcrypt.genSalt()
         const passWordHash = await bcrypt.hash(password, salt)
 
-        const registeredUser = User.build({
+        const savedRegisteredUser = await User.create({
             username,
             password: passWordHash,
             email,
             budget,
             time_stamp: new Date
         })
-
-        const savedRegisteredUser = await User.create(registeredUser)
         
         res.status(200).json({
             message: 'New User successfully registered',
             data: savedRegisteredUser
         })
 
-    } catch(err) {
-        res.status(500).send('Internal Server Error')
+    } catch(err: any) {
+        res.status(500).json({ error: err.message })
     }
 }
 
@@ -55,7 +52,7 @@ export const login = async (req: Request, res: Response) => {
         delete User.password
 
         res.status(200).json({ jwtToken, isUser })
-    } catch (err) {
-        res.status(500).send('Internal Server Error')
+    } catch(err: any) {
+        res.status(500).json({ error: err.message })
     }
 }

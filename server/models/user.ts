@@ -1,13 +1,22 @@
 'use strict';
 import { Model, Sequelize } from 'sequelize';
 
+interface UserAttributes {
+  user_id: number
+  user_name: string,
+  password: string,
+  email: string,
+  budget: number,
+  time_stamp: string
+}
+
 export interface DataTypes {
   INTEGER: any,
   STRING: string,
   DATE: string
 }
 module.exports = (sequelize: Sequelize, DataTypes: DataTypes) => {
-  class User extends Model {
+  class User extends Model<UserAttributes> {
     static associate(models: {Goal: any, Expense: any}) {
       User.hasMany(models.Goal, {
         foreignKey: 'user_id',

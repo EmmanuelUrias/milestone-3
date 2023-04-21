@@ -2,8 +2,17 @@
 import { Model, Sequelize } from 'sequelize';
 import { DataTypes } from './user';
 
+interface ExpenseAttributes {
+  expense_id: number,
+  expense_name: string,
+  expense_amount: number,
+  expense_type: string,
+  user_id: number,
+  time_stamp: string
+}
+
 module.exports = (sequelize: Sequelize, DataTypes: DataTypes) => {
-  class Expense extends Model {
+  class Expense extends Model<ExpenseAttributes> {
     static associate(models: { User: any }) {
       Expense.belongsTo(models.User, {
         foreignKey: 'user_id',
