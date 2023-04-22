@@ -28,7 +28,7 @@ fs
     );
   })
   .forEach((file: string): void => {
-    const model: ModelStatic<Model<any, any>> = require(path.join(__dirname, file))(sequelize, DataTypes)
+    const model: ModelStatic<Model<any, any>> = require(path.join(__dirname, file))
     db[model.name] = model;
   });
 
@@ -41,5 +41,4 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-export default db;
-
+export default db

@@ -1,5 +1,5 @@
 'use strict';
-import { Model, Sequelize } from 'sequelize';
+import { Model, Sequelize, DataTypes } from 'sequelize';
 
 
 interface UserAttributes {
@@ -17,8 +17,7 @@ export interface DataTypes {
   DATE: string
 }
 
-module.exports = (sequelize: Sequelize, DataTypes: DataTypes) => {
-  class User extends Model<UserAttributes> {
+export class User extends Model<UserAttributes> {
     static associate(models: {Goal: any, Expense: any}) {
       User.hasMany(models.Goal, {
         foreignKey: 'user_id',
@@ -31,6 +30,7 @@ module.exports = (sequelize: Sequelize, DataTypes: DataTypes) => {
       })
     }
   }
+ export function initUserModel(sequelize: any) {
   User.init({
     user_id: {
       type: DataTypes.INTEGER,

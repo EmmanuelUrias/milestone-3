@@ -15,51 +15,53 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.initUserModel = exports.User = void 0;
 var sequelize_1 = require("sequelize");
-module.exports = function (sequelize, DataTypes) {
-    var User = /** @class */ (function (_super) {
-        __extends(User, _super);
-        function User() {
-            return _super !== null && _super.apply(this, arguments) || this;
-        }
-        User.associate = function (models) {
-            User.hasMany(models.Goal, {
-                foreignKey: 'user_id',
-                as: 'goal'
-            });
-            User.hasMany(models.Expense, {
-                foreignKey: 'user_id',
-                as: 'expense'
-            });
-        };
-        return User;
-    }(sequelize_1.Model));
+var User = /** @class */ (function (_super) {
+    __extends(User, _super);
+    function User() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    User.associate = function (models) {
+        User.hasMany(models.Goal, {
+            foreignKey: 'user_id',
+            as: 'goal'
+        });
+        User.hasMany(models.Expense, {
+            foreignKey: 'user_id',
+            as: 'expense'
+        });
+    };
+    return User;
+}(sequelize_1.Model));
+exports.User = User;
+function initUserModel(sequelize) {
     User.init({
         user_id: {
-            type: DataTypes.INTEGER,
+            type: sequelize_1.DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
             unique: true
         },
         user_name: {
-            type: DataTypes.STRING,
+            type: sequelize_1.DataTypes.STRING,
             allowNull: false
         },
         password: {
-            type: DataTypes.STRING,
+            type: sequelize_1.DataTypes.STRING,
             allowNull: false
         },
         email: {
-            type: DataTypes.STRING,
+            type: sequelize_1.DataTypes.STRING,
             allowNull: false,
             unique: true
         },
         budget: {
-            type: DataTypes.INTEGER,
+            type: sequelize_1.DataTypes.INTEGER,
             allowNull: false
         },
         time_stamp: {
-            type: DataTypes.DATE,
+            type: sequelize_1.DataTypes.DATE,
             allowNull: false
         },
     }, {
@@ -68,4 +70,6 @@ module.exports = function (sequelize, DataTypes) {
         tableName: 'user'
     });
     return User;
-};
+}
+exports.initUserModel = initUserModel;
+;

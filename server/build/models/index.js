@@ -27,7 +27,7 @@ fs_1.default
         file.indexOf('.test.js') === -1);
 })
     .forEach(function (file) {
-    var model = require(path_1.default.join(__dirname, file))(sequelize, sequelize_1.DataTypes);
+    var model = require(path_1.default.join(__dirname, file));
     db[model.name] = model;
 });
 Object.keys(db).forEach(function (modelName) {
