@@ -1,11 +1,13 @@
-import express from 'express'
-import cors from 'cors'
-import dotenv from 'dotenv'
-import morgan from 'morgan'
-import helmet from 'helmet'
-import authRoutes from './routes/auth'
-import { fileURLToPath } from 'url'
-import path from 'path'
+
+const express = require('express')
+const cors = require('cors')
+const dotenv = require('dotenv')
+const morgan = require('morgan')
+const helmet = require('helmet')
+const authRoutes = require('./routes/auth.js')
+
+// import { fileURLToPath } from 'url'
+// import path from 'path'
 
 // Configurations
 // const __filename = fileURLToPath(import.meta.url) <-- may delete later

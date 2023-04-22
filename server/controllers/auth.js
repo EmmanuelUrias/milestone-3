@@ -1,14 +1,13 @@
-import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
-import db from '../models/user'
-const {User} = db
-console.log(db)
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const db = require('../models')
+const { User } = db
 
 // Register
-export const register = async (req, res) => {
+const register = async (req, res) => {
     try {
         const {
-            username,
+            user_name,
             password,
             email,
             budget
@@ -18,11 +17,12 @@ export const register = async (req, res) => {
         const passWordHash = await bcrypt.hash(password, salt)
 
         const savedRegisteredUser = await User.create({
-            username,
+            user_name,
             password: passWordHash,
             email,
             budget,
-            time_stamp: new Date
+            time_stamp: new Date,
+            createdAt: new Date
         })
         
         res.status(200).json({
@@ -37,7 +37,7 @@ export const register = async (req, res) => {
 }
 
 //Login
-export const login = async (req, res) => {
+const login = async (req, res) => {
     try {
         const { password, email } = req.body
         const isUser = await User.findOne({
@@ -56,3 +56,5 @@ export const login = async (req, res) => {
         res.status(500).json({ error: err.message })
     }
 }
+
+module.exports = {register, login}
