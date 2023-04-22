@@ -40,7 +40,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-var tokenVerification = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+var tokenVerification = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
     var token, verified;
     return __generator(this, function (_a) {
         try {
@@ -53,6 +53,7 @@ var tokenVerification = function (req, res) { return __awaiter(void 0, void 0, v
             }
             verified = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
             req.user = verified;
+            next();
         }
         catch (err) {
             res.status(500).send('Internal Server Error');

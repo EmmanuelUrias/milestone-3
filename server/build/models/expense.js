@@ -32,9 +32,7 @@ module.exports = function (sequelize, DataTypes) {
     }(sequelize_1.Model));
     Expense.init({
         expense_id: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
-            unique: true
+            type: DataTypes.INTEGER
         },
         expense_name: {
             type: DataTypes.STRING,

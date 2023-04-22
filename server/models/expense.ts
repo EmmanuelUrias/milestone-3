@@ -22,9 +22,7 @@ module.exports = (sequelize: Sequelize, DataTypes: DataTypes) => {
   }
   Expense.init({
     expense_id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      unique: true
+      type: DataTypes.INTEGER
     },
     expense_name: {
       type: DataTypes.STRING,

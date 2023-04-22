@@ -13,7 +13,7 @@ interface AuthRequest extends Request {
     user: User | string | JwtPayload
 }
 
-const tokenVerification = async (req: AuthRequest, res: Response) => {
+const tokenVerification = async (req: AuthRequest, res: Response, next: () => void) => {
     try {
         let token = req.header('Authorization')
 
@@ -27,6 +27,7 @@ const tokenVerification = async (req: AuthRequest, res: Response) => {
 
         const verified = jwt.verify(token, process.env.JWT_SECRET as Secret)
         req.user = verified
+        next()
     } catch (err){
         res.status(500).send('Internal Server Error')
     }

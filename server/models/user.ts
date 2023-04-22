@@ -1,6 +1,7 @@
 'use strict';
 import { Model, Sequelize } from 'sequelize';
 
+
 interface UserAttributes {
   user_id: number
   user_name: string,
@@ -15,6 +16,7 @@ export interface DataTypes {
   STRING: string,
   DATE: string
 }
+
 module.exports = (sequelize: Sequelize, DataTypes: DataTypes) => {
   class User extends Model<UserAttributes> {
     static associate(models: {Goal: any, Expense: any}) {

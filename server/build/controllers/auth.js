@@ -42,8 +42,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.login = exports.register = void 0;
 var bcrypt_1 = __importDefault(require("bcrypt"));
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-var db = require('../models/user');
-var User = db.User;
+var models_1 = __importDefault(require("../models"));
+var User = models_1.default.User;
 // Register
 var register = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, username, password, email, budget, salt, passWordHash, savedRegisteredUser, err_1;

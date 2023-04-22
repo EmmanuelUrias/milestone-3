@@ -20,9 +20,7 @@ module.exports = (sequelize: Sequelize, DataTypes: DataTypes) => {
   }
   Goal.init({
     goal_id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      unique: true
+      type: DataTypes.INTEGER
     },
     goal_amount: {
       type:DataTypes.INTEGER,
