@@ -20,7 +20,8 @@ const newGoal = async (req, res) => {
         const { goal_amount, user_id } = req.body
         const user = await User.findOne({ where: { user_id: user_id }})
 
-        const aMonthAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)
+        const todaysDate = new Date()
+        const aMonthAgo = todaysDate.getMonth() - 1
         const currentGoal = await Goal.findOne({
             where: {
                 user_id: user_id,
@@ -28,7 +29,7 @@ const newGoal = async (req, res) => {
             }
         })
         if (currentGoal) {
-            return res.status(400).json({ message: 'A goal was already created within the last 30 days' })
+            return res.status(400).json({ message: 'A goal was already created within this month' })
         }
 
         await Goal.create({
