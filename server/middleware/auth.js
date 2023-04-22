@@ -1,5 +1,4 @@
-import jwt from 'jsonwebtoken'
-
+const jwt = require('jsonwebtoken')
 
 const tokenVerification = async (req, res, next) => {
     try {
@@ -20,3 +19,5 @@ const tokenVerification = async (req, res, next) => {
         res.status(500).send('Internal Server Error')
     }
 }
+
+module.exports = { tokenVerification }
