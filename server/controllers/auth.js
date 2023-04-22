@@ -1,11 +1,11 @@
 import bcrypt from 'bcrypt'
-import jwt, { Secret } from 'jsonwebtoken'
-import db from '../models'
-import { Request, Response } from 'express'
-const { User } = db
+import jwt from 'jsonwebtoken'
+import db from '../models/user'
+const {User} = db
+console.log(db)
 
 // Register
-export const register = async (req: Request, res: Response) => {
+export const register = async (req, res) => {
     try {
         const {
             username,
@@ -30,13 +30,14 @@ export const register = async (req: Request, res: Response) => {
             data: savedRegisteredUser
         })
 
-    } catch(err: any) {
+    } catch(err) {
+        console.log(err)
         res.status(500).json({ error: err.message })
     }
 }
 
 //Login
-export const login = async (req: Request, res: Response) => {
+export const login = async (req, res) => {
     try {
         const { password, email } = req.body
         const isUser = await User.findOne({
@@ -47,11 +48,11 @@ export const login = async (req: Request, res: Response) => {
         const isMatch = await bcrypt.compare(password, isUser.password)
         if (!isMatch) return res.status(400).send('password is incorrect')
 
-        const jwtToken = jwt.sign({ user_id: isUser.user_id }, process.env.JWT_SECRET as Secret)
+        const jwtToken = jwt.sign({ user_id: isUser.user_id }, process.env.JWT_SECRET)
         delete User.password
 
         res.status(200).json({ jwtToken, isUser })
-    } catch(err: any) {
+    } catch(err) {
         res.status(500).json({ error: err.message })
     }
 }

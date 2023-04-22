@@ -1,20 +1,16 @@
 'use strict';
-import { Model, Sequelize } from 'sequelize';
-import { DataTypes } from './user';
-
-interface ExpenseAttributes {
-  expense_id: number,
-  expense_name: string,
-  expense_amount: number,
-  expense_type: string,
-  user_id: number,
-  time_stamp: string
-}
-
-module.exports = (sequelize: Sequelize, DataTypes: DataTypes) => {
-  class Expense extends Model<ExpenseAttributes> {
-    static associate(models: { User: any }) {
-      Expense.belongsTo(models.User, {
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class Expense extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate({User}) {
+      Expense.belongsTo(User, {
         foreignKey: 'user_id',
         as: 'user'
       })
@@ -22,7 +18,9 @@ module.exports = (sequelize: Sequelize, DataTypes: DataTypes) => {
   }
   Expense.init({
     expense_id: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      unique: true
     },
     expense_name: {
       type: DataTypes.STRING,
@@ -47,7 +45,8 @@ module.exports = (sequelize: Sequelize, DataTypes: DataTypes) => {
   }, {
     sequelize,
     modelName: 'Expense',
-    tableName: 'expense'
+    tableName: 'expense',
+    timestamps: true
   });
   return Expense;
 };

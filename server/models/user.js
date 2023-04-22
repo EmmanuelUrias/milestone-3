@@ -1,36 +1,26 @@
 'use strict';
-import { Model, Sequelize, DataTypes } from 'sequelize';
-
-
-interface UserAttributes {
-  user_id: number
-  user_name: string,
-  password: string,
-  email: string,
-  budget: number,
-  time_stamp: string
-}
-
-export interface DataTypes {
-  INTEGER: any,
-  STRING: string,
-  DATE: string
-}
-
-export class User extends Model<UserAttributes> {
-    static associate(models: {Goal: any, Expense: any}) {
-      User.hasMany(models.Goal, {
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class User extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate({Goal, Expense}) {
+      User.hasMany(Goal, {
         foreignKey: 'user_id',
         as: 'goal'
       })
 
-      User.hasMany(models.Expense, {
+      User.hasMany(Expense, {
         foreignKey: 'user_id',
         as: 'expense'
       })
     }
   }
- export function initUserModel(sequelize: any) {
   User.init({
     user_id: {
       type: DataTypes.INTEGER,
@@ -62,7 +52,8 @@ export class User extends Model<UserAttributes> {
   }, {
     sequelize,
     modelName: 'User',
-    tableName: 'user'
-    });
+    tableName: 'user',
+    timestamps: true
+  });
   return User;
 };
