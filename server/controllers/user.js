@@ -14,4 +14,8 @@ const getUser = async (req, res) => {
     }
 }
 
+// Patch
+
+// Delete --> Note: maybe should be in auth
+
 module.exports = { getUser }

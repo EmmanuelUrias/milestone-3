@@ -7,6 +7,7 @@ const tokenVerification = require('./middleware/auth')
 const authRoutes = require('./routes/auth.js')
 const userRoutes = require('./routes/user.js')
 const goalRoutes = require('./routes/goal')
+const expenseRoutes = require('./routes/expense')
 
 // Middleware
 dotenv.config()
@@ -23,6 +24,7 @@ app.use(express.json())
 app.use('/auth', authRoutes)
 app.use('/user', userRoutes)
 app.use('/goal', goalRoutes)
+app.use('/expense', expenseRoutes)
 
 app.listen(process.env.PORT, () => {
     console.log(`Your running on ${process.env.PORT} 😼`)
