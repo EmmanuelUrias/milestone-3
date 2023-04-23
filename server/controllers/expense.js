@@ -86,4 +86,4 @@ const deleteExpense = async (req, res) => {
     })
 }
 
-module.exports = { getExpenses, newExpense, updateExpense, deleteExpense }
+module.exports = { getExpenses, getThisMonthsExpenses, newExpense, updateExpense, deleteExpense }
