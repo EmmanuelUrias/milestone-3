@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     user_id: {
       type: DataTypes.INTEGER,
-      unique: true
+      allowNull: false
     },
     time_stamp: {
       type: DataTypes.DATE,

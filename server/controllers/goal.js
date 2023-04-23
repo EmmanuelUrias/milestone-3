@@ -5,7 +5,8 @@ const { Op } = require('sequelize')
 // Get 
 const findGoals = async (req, res) => {
     try {
-        const goals = await Goal.findAll()
+        const { user_id } = req.params
+        const goals = await Goal.findAll({ where: {user_id: user_id}})
 
         res.status(200).json(goals)
     } catch (err) {
