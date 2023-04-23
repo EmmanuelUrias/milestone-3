@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.get('/:user_id', getExpenses)
 router.post('/:user_id', newExpense)
-router.patch('/:expense_id', updateExpense)
-router.delete('/:expense_id', deleteExpense)
+router.patch('/:user_id', updateExpense)
+router.delete('/:user_id', deleteExpense)
 
 module.exports = router
