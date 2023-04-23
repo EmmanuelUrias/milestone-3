@@ -1,5 +1,5 @@
 const db = require('../models')
-const { User, Goal } = db
+const { Goal } = db
 const { Op } = require('sequelize')
 
 // Get 
@@ -36,11 +36,11 @@ const newGoal = async (req, res) => {
         console.log(goal_amount)
 
         const todaysDate = new Date()
-        const aMonthAgo = new Date(todaysDate.setMonth(todaysDate.getMonth() - 1))
+        const thisMonth = new Date(todaysDate.setMonth(todaysDate.getMonth() - 1))
         const currentGoal = await Goal.findOne({
             where: {
                 user_id,
-                time_stamp: { [Op.gte]: aMonthAgo }
+                time_stamp: { [Op.gte]: thisMonth }
             }
         })
         if (currentGoal) {
@@ -77,7 +77,7 @@ const updateGoal = async (req, res) => {
         const { goal_amount } = req.body
 
         const todaysDate = new Date()
-        const aMonthAgo = new Date(todaysDate.setMonth(todaysDate.getMonth() - 1))
+        const thisMonth = new Date(todaysDate.setMonth(todaysDate.getMonth() - 1))
     
         const updatedGoal = await Goal.update({
             goal_amount: goal_amount,
@@ -85,7 +85,7 @@ const updateGoal = async (req, res) => {
             createdAt: new Date
         }, { where: { 
             user_id: user_id,
-            time_stamp: { [Op.gte]: aMonthAgo }
+            time_stamp: { [Op.gte]: thisMonth }
         }}
         )
     
@@ -105,12 +105,12 @@ const deleteGoal = async (req, res) => {
         const { user_id } = req.params
 
         const todaysDate = new Date()
-        const aMonthAgo = new Date(todaysDate.setMonth(todaysDate.getMonth() - 1))
+        const thisMonth = new Date(todaysDate.setMonth(todaysDate.getMonth() - 1))
 
         const deletedGoal = await Goal.destroy({ 
             where: { 
                 user_id: user_id,
-                time_stamp: {[Op.gte]: aMonthAgo}
+                time_stamp: {[Op.gte]: thisMonth}
              }}
             )
     

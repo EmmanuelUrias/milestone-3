@@ -1,5 +1,5 @@
 const db = require('../models')
-const { User, Expense } = db
+const { Expense } = db
 const { Op } = require('sequelize')
 
 // Get
@@ -9,6 +9,22 @@ const getExpenses = async (req, res) => {
     const expenses = await Expense.findAll({ where: { user_id: user_id }})
 
     res.status(200).json(expenses)
+}
+
+const getThisMonthsExpenses = async (req, res) => {
+    const { user_id } = req.params
+
+    const todaysDate = new Date()
+    const thisMonth = new Date(todaysDate.setMonth(todaysDate.getMonth() - 1))
+
+    const thisMonthsExpenses = await Expense.findAll({
+        where: {
+            user_id: user_id,
+            time_stamp: { [Op.gte]: thisMonth}
+        }
+    })
+
+    res.status(200).json(thisMonthsExpenses)
 }
 
 // Post
