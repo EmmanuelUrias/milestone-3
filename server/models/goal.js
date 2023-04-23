@@ -14,8 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     goal_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true,
-      unique: true
+      autoIncrement: true
     },
     goal_amount: {
       type:DataTypes.INTEGER,

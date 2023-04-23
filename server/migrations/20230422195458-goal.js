@@ -7,8 +7,7 @@ module.exports = {
       goal_id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
-        autoIncrement: true,
-        unique: true
+        autoIncrement: true
       },
       goal_amount: {
         type:Sequelize.INTEGER,
@@ -16,7 +15,6 @@ module.exports = {
       },
       user_id: {
         type: Sequelize.INTEGER,
-        unique: true,
         references: {
           model: {
             tableName: 'user',

@@ -7,8 +7,7 @@ module.exports = {
       expense_id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
-        autoIncrement: true,
-        unique: true
+        autoIncrement: true
       },
       expense_name: {
         type: Sequelize.STRING,
@@ -24,7 +23,6 @@ module.exports = {
       },
       user_id: {
         type: Sequelize.INTEGER,
-        unique: true,
         references: {
           model: {
             tableName: 'user',

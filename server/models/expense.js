@@ -14,8 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     expense_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true,
-      unique: true
+      autoIncrement: true
     },
     expense_name: {
       type: DataTypes.STRING,

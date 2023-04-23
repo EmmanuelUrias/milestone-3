@@ -1,5 +1,6 @@
 const db = require('../models')
 const { User, Goal } = db
+const { Op } = require('sequelize')
 
 // Get 
 const findGoal = async (req, res) => {
@@ -17,15 +18,16 @@ const findGoal = async (req, res) => {
 // Post
 const newGoal = async (req, res) => {
     try {
-        const { goal_amount, user_id } = req.body
-        const user = await User.findOne({ where: { user_id: user_id }})
+        const { user_id } = req.params
+        const { goal_amount } = req.body
+        console.log(goal_amount)
 
         const todaysDate = new Date()
-        const aMonthAgo = todaysDate.getMonth() - 1
+        const aMonthAgo = new Date(todaysDate.setMonth(todaysDate.getMonth() - 1))
         const currentGoal = await Goal.findOne({
             where: {
-                user_id: user_id,
-                createdAt: { [Op.gte]: aMonthAgo }
+                user_id,
+                time_stamp: { [Op.gte]: aMonthAgo }
             }
         })
         if (currentGoal) {
@@ -33,16 +35,15 @@ const newGoal = async (req, res) => {
         }
 
         await Goal.create({
-            goal_amount,
-            user_id: user.user_id,
-            time_stamp: new Date,
-            createdAt: new Date
+            goal_amount: goal_amount,
+            user_id,
+            time_stamp: new Date
         })
 
         const goal = await Goal.findOne({
             where: {
                 user_id: user_id,
-                createdAt: { [Op.gte]: aMonthAgo }
+                time_stamp: { [Op.gte]: aMonthAgo }
             }
         })
 
@@ -56,4 +57,37 @@ const newGoal = async (req, res) => {
     }
 }
 
-module.exports = { findGoal, newGoal }
+// Patch
+const updateGoal = async (req, res) => {
+    try {
+        const { user_id } = req.params
+        const { goal_amount } = req.body
+
+        const todaysDate = new Date()
+        const aMonthAgo = new Date(todaysDate.setMonth(todaysDate.getMonth() - 1))
+    
+        const updatedGoal = await Goal.update({
+            goal_amount: goal_amount,
+            time_stamp: new Date,
+            createdAt: new Date
+        }, { where: { 
+            user_id: user_id,
+            time_stamp: { [Op.gte]: aMonthAgo }
+        }}
+        )
+    
+        res.status(200).json({
+            message: 'new goal created',
+            data: updatedGoal
+        })
+    } catch (err) {
+        console.log(err)
+        res.status(404).json({ message: err.message })
+    }
+}
+
+// Delete
+const deleteGoal = async (req, res) => {}
+
+
+module.exports = { findGoal, newGoal, updateGoal}

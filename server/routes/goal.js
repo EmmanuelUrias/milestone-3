@@ -1,8 +1,10 @@
 const express = require('express')
-const { newGoal } = require('../controllers/goal')
+const { newGoal, findGoal, updateGoal } = require('../controllers/goal')
 
 const router = express.Router()
 
-router.post('/', newGoal)
+router.get('/:user_id', findGoal)
+router.post('/:user_id', newGoal)
+router.patch('/:user_id', updateGoal)
 
 module.exports = router
