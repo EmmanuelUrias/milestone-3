@@ -3,6 +3,18 @@ const { User, Goal } = db
 const { Op } = require('sequelize')
 
 // Get 
+const findGoals = async (req, res) => {
+    try {
+        const goals = await Goal.findAll()
+
+        res.status(200).json(goals)
+    } catch (err) {
+        console.log(err)
+        res.status(404).json({ message: err.message })
+    }
+}
+
+
 const findGoal = async (req, res) => {
     try {
         const { user_id } = req.params
@@ -112,4 +124,4 @@ const deleteGoal = async (req, res) => {
 }
 
 
-module.exports = { findGoal, newGoal, updateGoal, deleteGoal}
+module.exports = { findGoals, findGoal, newGoal, updateGoal, deleteGoal}
