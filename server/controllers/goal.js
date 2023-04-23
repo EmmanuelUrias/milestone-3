@@ -87,7 +87,29 @@ const updateGoal = async (req, res) => {
 }
 
 // Delete
-const deleteGoal = async (req, res) => {}
+const deleteGoal = async (req, res) => {
+    try {
+        const { user_id } = req.params
+
+        const todaysDate = new Date()
+        const aMonthAgo = new Date(todaysDate.setMonth(todaysDate.getMonth() - 1))
+
+        const deletedGoal = await Goal.destroy({ 
+            where: { 
+                user_id: user_id,
+                time_stamp: {[Op.gte]: aMonthAgo}
+             }}
+            )
+    
+        res.status(200).json({
+            message: 'goal was terminated',
+            data: deletedGoal
+        })
+    } catch (err) {
+        console.log(err)
+        res.status(404).json({ message: err.message })
+    } 
+}
 
 
-module.exports = { findGoal, newGoal, updateGoal}
+module.exports = { findGoal, newGoal, updateGoal, deleteGoal}
