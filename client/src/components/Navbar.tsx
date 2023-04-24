@@ -40,7 +40,8 @@ const Navbar = () => {
         alignItems: 'center'
       } : {
         width: '100%',
-        height: '100vh',
+        height: '20%',
+        border: '1px solid',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -49,7 +50,7 @@ const Navbar = () => {
         <Typography variant='h4' color='#3059BE' marginTop='20px'>
           Budget Buddy
         </Typography>
-        <Box sx={{
+        <Box sx={ smallScreen ? {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
@@ -57,6 +58,13 @@ const Navbar = () => {
           position: 'relative',
           top: '-10%',
           '& > *': {marginBottom: '20px'}
+        } : {
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+          position: 'relative',
+          '& > *': {marginLeft: '20px'}
         }}>
           <Link underline='hover' color='#3059BE' sx={{ position: 'flex-bottom' }} variant='h5'>Tracker</Link>
           <Link underline='hover' color='#3059BE' variant='h5'>Tips</Link>
@@ -74,7 +82,7 @@ const Navbar = () => {
           <Popper
             open={open}
             anchorEl={anchorRef.current}
-            placement="right-start"
+            placement={ smallScreen ? "right-start" : "bottom-end"}
             transition
           >
             {({ TransitionProps, placement }) => (

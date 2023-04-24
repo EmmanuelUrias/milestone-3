@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import Navbar from './components/Navbar'
 
-import './App.css'
 
 function App() {
 // On mobile just make it all vertical and navbar horizontal
