@@ -1,15 +1,25 @@
 import React, { useState } from 'react'
-import { Typography, Box, Link, MenuList, MenuItem, Popper, Button, Grow, Paper, Stack, ClickAwayListener, useMediaQuery } from '@mui/material'
+import { Typography, Box, Link, MenuList, MenuItem, Popper, Button, Grow, Paper, Stack, Divider, ClickAwayListener, useMediaQuery, IconButton } from '@mui/material'
+import AddchartIcon from '@mui/icons-material/Addchart';
+import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 
 const Navbar = () => {
     const [open, setOpen] = useState(false)
     const smallScreen = useMediaQuery('(min-width: 600px)')
+    const [isMobileNavMenuToggled, setIsMobileNavMenuToggled] = useState(false)
 
     const anchorRef = React.useRef<HTMLButtonElement>(null);
 
     const handleToggle = () => {
-      setOpen((prevOpen) => !prevOpen);
+      setOpen(!open);
     };
+
+    const handleMenuOpen = () => {
+      setIsMobileNavMenuToggled(!isMobileNavMenuToggled)
+      handleToggle()
+    }
   
     const handleClose = (event: Event | React.SyntheticEvent) => {
       if (
@@ -21,6 +31,8 @@ const Navbar = () => {
   
       setOpen(false);
     };
+
+    //const logOut = setLogout() reroute to login page
   
     function handleListKeyDown(event: React.KeyboardEvent) {
       if (event.key === 'Tab') {
@@ -41,33 +53,39 @@ const Navbar = () => {
       } : {
         width: '100%',
         height: '20%',
-        border: '1px solid',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'top'
       }}>
-        <Typography variant='h4' color='#3059BE' marginTop='20px'>
+        <Typography variant='h4' color='#3059BE' marginTop={smallScreen ? '20px' : '7px'} marginLeft={smallScreen ? '0rem' : '0.7rem'} sx={{'& > *': {marginTop: '10px'}}}>
           Budget Buddy
+          <Divider variant='middle'/>
         </Typography>
-        <Box sx={ smallScreen ? {
+        { smallScreen ? <Box sx={ smallScreen ? {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
           position: 'relative',
           top: '-10%',
-          '& > *': {marginBottom: '20px'}
+          '& > *': {marginBottom: '22px'},
+          '& > *:hover': {cursor: 'pointer'}
         } : {
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: 'center',
           position: 'relative',
-          '& > *': {marginLeft: '20px'}
+          '& > *': {marginLeft: '20px'},
+          '& > *:hover': {cursor: 'pointer'}
         }}>
-          <Link underline='hover' color='#3059BE' sx={{ position: 'flex-bottom' }} variant='h5'>Tracker</Link>
-          <Link underline='hover' color='#3059BE' variant='h5'>Tips</Link>
+          <Link underline='hover' color='#3059BE' variant='h5' sx={{marginBottom: '20px', marginRight: '10px'}}>
+            <AddchartIcon/> Tracker
+          </Link>
+          <Link underline='hover' color='#3059BE' variant='h5' sx={{marginBottom: '20px', marginRight: '10px'}}>
+            <TipsAndUpdatesIcon /> Tips
+          </Link>
           <Box>
           <Stack direction="row" spacing={2}>
         <div>
@@ -79,10 +97,11 @@ const Navbar = () => {
           >
             Account
           </Button>
+          <Divider variant='middle'/>
           <Popper
             open={open}
             anchorEl={anchorRef.current}
-            placement={ smallScreen ? "right-start" : "bottom-end"}
+            placement="right-start"
             transition
           >
             {({ TransitionProps, placement }) => (
@@ -110,7 +129,53 @@ const Navbar = () => {
         </div>
       </Stack>
           </Box>
-        </Box>
+        </Box> : (
+          <Box marginTop='2px'>
+            {!isMobileNavMenuToggled && (<IconButton onClick={handleMenuOpen}>
+              <MenuIcon fontSize='large'/>
+            </IconButton>)}
+            {isMobileNavMenuToggled && (
+              <div>
+              <Stack direction="row" spacing={2}>
+                  <div>
+                    <Button ref={anchorRef} onClick={handleMenuOpen}>
+                      <CloseIcon fontSize='large' />
+                    </Button>
+                    <Divider variant='middle' />
+                    <Popper
+                      open={open}
+                      anchorEl={anchorRef.current}
+                      placement={ smallScreen ? "right-start" : "bottom-end"}                      
+                      transition
+                    >
+                      {({ TransitionProps, placement }) => (
+                        <Grow
+                          {...TransitionProps}
+                          style={{
+                            transformOrigin: placement === 'bottom-start' ? 'left top' : 'left bottom',
+                          }}
+                        >
+                          <Paper>
+                            <ClickAwayListener onClickAway={handleClose}>
+                              <MenuList
+                                autoFocusItem={open}
+                                onKeyDown={handleListKeyDown}
+                              >
+                                <MenuItem onClick={handleClose}>User_Name</MenuItem>
+                                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                              </MenuList>
+                            </ClickAwayListener>
+                          </Paper>
+                        </Grow>
+                      )}
+                    </Popper>
+                  </div>
+                </Stack>
+                </div>
+            )}
+          </Box>
+
+        )}
     </Box>
   )
 }

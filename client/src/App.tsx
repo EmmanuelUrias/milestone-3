@@ -3,6 +3,8 @@ import Navbar from './components/Navbar'
 import { useSelector, useDispatch } from 'react-redux'
 import { setLogin, setLogout } from './ducks/userSlice'
 import { RootState } from './store'
+import HomePage from './scenes/HomePage'
+import './App.css'
 
 function App() {
   const user = useSelector((state: RootState) => state.userAuthAndInfo.user)
@@ -12,11 +14,10 @@ function App() {
   console.log(user)
 
   return (
-    <div className="App">
+    <div className='App'>
         <Navbar /> 
-      <div className="card">
-        {/* Homepage */}
-        {user_name}
+      <div>
+        <HomePage />
       </div>
     </div>
   )
