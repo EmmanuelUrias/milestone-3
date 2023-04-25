@@ -49,14 +49,19 @@ const Navbar = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: '#F8F8FF',
+        opacity: 0.7
       } : {
         width: '100%',
-        height: '20%',
+        height: '70px',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'top'
+        alignItems: 'top',
+        backgroundColor: '#F8F8FF',
+        opacity: 0.7,
+        position: 'fixed'
       }}>
         <Typography variant='h4' color='#3059BE' marginTop={smallScreen ? '20px' : '7px'} marginLeft={smallScreen ? '0rem' : '0.7rem'} sx={{'& > *': {marginTop: '10px'}}}>
           Budget Buddy

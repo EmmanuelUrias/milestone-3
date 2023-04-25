@@ -5,6 +5,7 @@ import { setLogin, setLogout } from './ducks/userSlice'
 import { RootState } from './store'
 import HomePage from './scenes/HomePage'
 import './App.css'
+import { Box } from '@mui/material'
 
 function App() {
   const user = useSelector((state: RootState) => state.userAuthAndInfo.user)
@@ -16,9 +17,9 @@ function App() {
   return (
     <div className='App'>
         <Navbar /> 
-      <div>
+      <Box sx={{width: '90%'}}>
         <HomePage />
-      </div>
+      </Box>
     </div>
   )
 }

@@ -1,4 +1,6 @@
+import { Typography, Box } from '@mui/material'
 import React from 'react'
+import IndividualExpense from '../components/IndividualExpense'
 
 const ExpenseFeed = () => {
     // fetch all expenses for that month, make controller /:month and pass the month in through a Date() variable that has the month
@@ -13,11 +15,52 @@ const ExpenseFeed = () => {
     
     const date = new Date()
     const monthName = monthNames[date.getMonth()]
+
+    const expenses = [
+      {
+        name: 'hello',
+        amount: 100
+      },
+      {
+        name: 'world',
+        amount: 50
+      }
+    ]
+
+    let total: number | undefined = 0
+
+    for (let i = 0; i < expenses.length; i++) {
+      total += expenses[i].amount
+    }
     
     console.log(monthName)
 
   return (
-    <div>ExpenseFeed</div>
+    <Box sx={{
+      width: '40%',
+      backgroundColor: '#3059BE',
+      borderRadius: '15px'
+    }}>
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}>
+        <Typography variant='h5'>
+            Expenses
+        </Typography>
+      </Box>
+      <Box>
+        {expenses.map(({name, amount}) => (
+          <IndividualExpense 
+            name={name}
+            amount={amount}
+          />
+        ))}
+        {total}
+      </Box>
+    </Box>
   )
 }
 
