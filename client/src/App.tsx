@@ -15,15 +15,17 @@ function App() {
   const dispatch = useDispatch()
   const isLoggedIn = Boolean(useSelector((state: RootState) => state.userAuthAndInfo.token))
 
-  const { user_name, password } = user
+  if (user) {
+    const { user_name, password } = user
+  }
   console.log(user)
 
   return (
     <div className='App'>
-        <Navbar /> 
-      <Box sx={{width: '90%'}}>
+        {isLoggedIn && <Navbar /> }
+      <Box sx={isLoggedIn ? { width: '90%' } : { width: '100%' }}>
         <Routes>
-          <Route path='/' element={<LoginPage />} />
+          <Route path='/' element={!isLoggedIn ? <LoginPage /> : <Navigate to='/home' />} />
           <Route path='/home' element={isLoggedIn ? <HomePage /> : <Navigate to='/'/> }/>
           <Route path='/tips' element={isLoggedIn ? <FinancialTipsPage /> : <Navigate to='/'/>}/>
         </Routes>

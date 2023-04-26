@@ -20,21 +20,24 @@ interface Expense {
 }
 
 interface InitialState {
-    user: User,
-    token: string,
+    user: User | null,
+    token: string | null,
     expenses: Expense[]
 }
 
 const initialState: InitialState = {
-    user: {
-        user_id: 0,
-        user_name: 'none',
-        password: 'none',
-        email: 'none',
-        budget: 0,
-        time_stamp: '0'
-    },
-    token: 'null',
+    user: null
+    // {
+    //     user_id: 1,
+    //     user_name: 'none',
+    //     password: 'none',
+    //     email: 'none',
+    //     budget: 2000,
+    //     time_stamp: '2016-04-22'
+
+    // }
+    ,
+    token: null,
     expenses: []
 }
 
