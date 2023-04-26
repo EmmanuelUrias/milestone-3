@@ -14,8 +14,17 @@ const Goal = () => {
   }
     
   return (
-    <Box>
-      <Typography>{goalAmount}</Typography>
+    <Box sx={{
+      backgroundColor: '#3059BE',
+       borderRadius: '15px',
+       display: 'flex',
+       flexDirection: 'column',
+       justifyContent: 'center',
+       alignItems: 'center',
+       padding: '1rem'
+    }}>
+      <Typography>This Months Goal:</Typography>
+      <Typography>${goalAmount}</Typography>
       {onTrack ? 'On track 😁👍' : '😬'} 
     </Box>
   )

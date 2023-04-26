@@ -9,7 +9,11 @@ const MonthlyExpenseAmount = () => {
     <Box sx={{
       backgroundColor: '#3059BE',
       borderRadius: '15px',
-      padding: '1.2rem'
+      padding: '1rem',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center'
     }}>
       <Typography>Amount Spent</Typography>
       <Typography>{totalExpenses}</Typography>
