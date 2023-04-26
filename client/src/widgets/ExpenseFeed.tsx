@@ -24,6 +24,22 @@ const ExpenseFeed = () => {
       {
         name: 'world',
         amount: 50
+      },
+      {
+        name: 'hello',
+        amount: 100
+      },
+      {
+        name: 'world',
+        amount: 50
+      },
+      {
+        name: 'hello',
+        amount: 100
+      },
+      {
+        name: 'world',
+        amount: 50
       }
     ]
 
@@ -51,7 +67,10 @@ const ExpenseFeed = () => {
             Expenses
         </Typography>
       </Box>
-      <Box>
+      <Box sx={{
+        height: '300px',
+        overflowY: 'scroll'
+      }}>
         {expenses.map(({name, amount}) => (
           <IndividualExpense 
             name={name}
