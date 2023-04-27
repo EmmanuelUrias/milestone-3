@@ -19,7 +19,6 @@ function App() {
 
   const userToken = localStorage.getItem('jwtToken')
   const userCookies = localStorage.getItem('isUser')
-  console.log(JSON.stringify(userCookies))
 
   if (userToken && userCookies) {
     dispatch(setLogin({
@@ -29,11 +28,6 @@ function App() {
     }))
   }
 
-  if (user) {
-    const { user_name, password } = user
-  }
-  console.log(user)
-
   return (
     <div className='App'>
         {isLoggedIn && <Navbar /> }
@@ -42,7 +36,7 @@ function App() {
           <Route path='/' element={!isLoggedIn ? <LoginPage /> : <Navigate to='/home' />} />
           <Route path='/home' element={isLoggedIn ? <HomePage /> : <Navigate to='/'/> }/>
           <Route path='/tips' element={isLoggedIn ? <FinancialTipsPage /> : <Navigate to='/'/>}/>
-          <Route path='/account' element={isLoggedIn ? <EditOrDeleteAccountPage /> : <Navigate to='/'/>}/>
+          <Route path='/account/:user_id' element={isLoggedIn ? <EditOrDeleteAccountPage /> : <Navigate to='/'/>}/>
         </Routes>
       </Box>
     </div>

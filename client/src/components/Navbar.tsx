@@ -4,14 +4,21 @@ import AddchartIcon from '@mui/icons-material/Addchart';
 import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import { useDispatch } from 'react-redux';
-import { setLogout } from '../ducks/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLogout, userAuthAndInfoSlice } from '../ducks/userSlice';
+import { RootState } from '../store';
+import { useNavigate } from 'react-router-dom';
+import { User } from '../ducks/userSlice';
 
 const Navbar = () => {
     const [open, setOpen] = useState(false)
     const smallScreen = useMediaQuery('(min-width: 600px)')
     const [isMobileNavMenuToggled, setIsMobileNavMenuToggled] = useState(false)
     const dispatch = useDispatch()
+    const user = useSelector((state: RootState) => state.userAuthAndInfo.user)
+    const {user_id, user_name} = user
+    const navigate = useNavigate()
+    console.log(user.user_name)
 
     const anchorRef = React.useRef<HTMLButtonElement>(null);
 
@@ -26,6 +33,10 @@ const Navbar = () => {
     const handleMenuOpen = () => {
       setIsMobileNavMenuToggled(!isMobileNavMenuToggled)
       handleToggle()
+    }
+
+    const handleNavigate = (event: Event | React.SyntheticEvent) => {
+      navigate(`/account/${user_id}`)
     }
   
     const handleClose = (event: Event | React.SyntheticEvent) => {
@@ -130,7 +141,7 @@ const Navbar = () => {
                       autoFocusItem={open}
                       onKeyDown={handleListKeyDown}
                     >
-                      <MenuItem onClick={handleClose}>User_Name</MenuItem>
+                      <MenuItem onClick={handleNavigate}>{user_name}</MenuItem>
                       <MenuItem onClick={handleLogOut}>Logout</MenuItem>
                     </MenuList>
                   </ClickAwayListener>
@@ -173,8 +184,8 @@ const Navbar = () => {
                                 autoFocusItem={open}
                                 onKeyDown={handleListKeyDown}
                               >
-                                <MenuItem onClick={handleClose}>User_Name</MenuItem>
-                                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                                <MenuItem onClick={handleNavigate}>{user_name}</MenuItem>
+                                <MenuItem onClick={handleLogOut}>Logout</MenuItem>
                               </MenuList>
                             </ClickAwayListener>
                           </Paper>
