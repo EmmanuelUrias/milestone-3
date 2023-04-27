@@ -10,6 +10,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import LoginPage from './scenes/LoginPage'
 import FinancialTipsPage from './scenes/FinancialTipsPage'
 import { User } from './ducks/userSlice'
+import EditOrDeleteAccountPage from './scenes/EditOrDeleteAccountPage'
 
 function App() {
   const user = useSelector((state: RootState) => state.userAuthAndInfo.user)
@@ -41,6 +42,7 @@ function App() {
           <Route path='/' element={!isLoggedIn ? <LoginPage /> : <Navigate to='/home' />} />
           <Route path='/home' element={isLoggedIn ? <HomePage /> : <Navigate to='/'/> }/>
           <Route path='/tips' element={isLoggedIn ? <FinancialTipsPage /> : <Navigate to='/'/>}/>
+          <Route path='/account' element={isLoggedIn ? <EditOrDeleteAccountPage /> : <Navigate to='/'/>}/>
         </Routes>
       </Box>
     </div>
