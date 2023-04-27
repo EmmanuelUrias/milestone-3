@@ -9,11 +9,24 @@ import { Box } from '@mui/material'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import LoginPage from './scenes/LoginPage'
 import FinancialTipsPage from './scenes/FinancialTipsPage'
+import { User } from './ducks/userSlice'
 
 function App() {
   const user = useSelector((state: RootState) => state.userAuthAndInfo.user)
   const dispatch = useDispatch()
   const isLoggedIn = Boolean(useSelector((state: RootState) => state.userAuthAndInfo.token))
+
+  const userToken = localStorage.getItem('jwtToken')
+  const userCookies = localStorage.getItem('isUser')
+  console.log(JSON.stringify(userCookies))
+
+  if (userToken && userCookies) {
+    dispatch(setLogin({
+      user: userCookies as unknown as User,
+      token: userToken,
+      expenses: []
+    }))
+  }
 
   if (user) {
     const { user_name, password } = user

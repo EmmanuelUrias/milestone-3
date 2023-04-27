@@ -31,8 +31,6 @@ const LoginPage = () => {
       body: JSON.stringify(user)
     })
 
-    const newUser = await newUserRes.json()
-
     setIsToRegister(false)
   }
 
@@ -60,6 +58,9 @@ const LoginPage = () => {
         expenses: []
       }))
     }
+
+    localStorage.setItem('jwtToken', loggedInUser.jwtToken)
+    localStorage.setItem('isUser', JSON.stringify(loggedInUser.isUser))
 
     navigate('/home')
   }

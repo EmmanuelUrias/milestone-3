@@ -4,13 +4,20 @@ import AddchartIcon from '@mui/icons-material/Addchart';
 import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import { useDispatch } from 'react-redux';
+import { setLogout } from '../ducks/userSlice';
 
 const Navbar = () => {
     const [open, setOpen] = useState(false)
     const smallScreen = useMediaQuery('(min-width: 600px)')
     const [isMobileNavMenuToggled, setIsMobileNavMenuToggled] = useState(false)
+    const dispatch = useDispatch()
 
     const anchorRef = React.useRef<HTMLButtonElement>(null);
+
+    const handleLogOut = (event: Event | React.SyntheticEvent) => {
+      dispatch(setLogout())
+    }
 
     const handleToggle = () => {
       setOpen(!open);
@@ -124,7 +131,7 @@ const Navbar = () => {
                       onKeyDown={handleListKeyDown}
                     >
                       <MenuItem onClick={handleClose}>User_Name</MenuItem>
-                      <MenuItem onClick={handleClose}>Logout</MenuItem>
+                      <MenuItem onClick={handleLogOut}>Logout</MenuItem>
                     </MenuList>
                   </ClickAwayListener>
                 </Paper>
