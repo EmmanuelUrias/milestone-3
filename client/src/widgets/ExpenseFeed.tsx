@@ -1,4 +1,4 @@
-import { Typography, Box } from '@mui/material'
+import { Typography, Box, Input } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import IndividualExpense from '../components/IndividualExpense'
 import { useDispatch, useSelector } from 'react-redux'
@@ -91,7 +91,23 @@ const ExpenseFeed = () => {
         ))}
       </Box>
         <Box>
-          
+          <form onSubmit={newExpense}>
+            <Box sx={{
+              display: 'flex',
+              flexDirection: 'column'
+              }}>
+            <Typography variant='h6'>Add Expense</Typography>
+              <Input onChange={(event) => setExpense_name(event.target.value)} value={expense_name} type='string' placeholder='Expense Name' required/>
+            <Box sx={{
+              display: 'flex',
+              flexDirection: 'row'
+            }}>
+              <Input sx={{width: '50%'}} onChange={(event) => setExpense_amount(parseInt(event.target.value))} value={expense_amount.toString()} type='number' placeholder='Expense Amount' required/>
+              <Input onChange={(event) => setExpense_type(event.target.value)} value={expense_type} type='string' placeholder='Expense Type'/>
+            </Box>
+            </Box>
+              <button type='submit'>Add Expense</button>
+          </form>
         </Box>
     </Box>
   )

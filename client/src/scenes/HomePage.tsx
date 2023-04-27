@@ -3,6 +3,7 @@ import ExpenseFeed from '../widgets/ExpenseFeed'
 import { Box } from '@mui/material'
 import MonthlyExpenseAmount from '../widgets/MonthlyExpenseAmount'
 import Goal from '../widgets/Goal'
+import AddGoal from '../widgets/AddGoal'
 
 const HomePage = () => {
     // Homepage make sure is dynamic with mobile screens
@@ -14,6 +15,7 @@ const HomePage = () => {
         <Box>
           <MonthlyExpenseAmount />
           <Goal />
+          <AddGoal />
         </Box>
       </Box>
               {/* ExpenseFeed */} {/* Center of the page */}
