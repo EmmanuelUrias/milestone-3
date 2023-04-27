@@ -4,32 +4,24 @@ import React, { useState } from 'react'
 const LoginPage = () => {
   const [isToRegister, setIsToRegister] = useState(true)
   const [message, setMessage] = useState('')
-  const [values, setValues] = useState({
-    user_name: '',
-    password: '',
-    email: '',
-    budget: 0
-  })
-  
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const {id, value} = event.target
-    setValues({...values, [id]: value})
-  }
+  const [user_name, setUser_name] = useState('')
+  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('')
+  const [budget, setBudget] = useState(0)
 
   const register = async (event: any) => {
     event.preventDefault()
     const user = {
-      user_name: values.user_name,
-      password: values.password,
-      email: values.email,
-      budget: values.budget,
-      time_stamp: new Date
+      user_name: user_name,
+      password: password,
+      email: email,
+      budget: budget
     }
 
-    const newUserRes = await fetch('', {
+    const newUserRes = await fetch('http://localhost:3005/auth/register', {
       method: 'POST',
       headers: {
-        'Content_Type': 'application/json'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(user)
     })
@@ -39,6 +31,7 @@ const LoginPage = () => {
     if(newUser) {
       setMessage('User already exists')
     }
+    console.log(newUserRes)
   }
 
   const logIn = async (event: any) => {
@@ -60,16 +53,14 @@ const LoginPage = () => {
         }}>
           <Typography variant='h3'>Register</Typography>
           <form onSubmit={register}>
-            <FormControl>
               <FormLabel>Username</FormLabel>
-              <Input id='user_name' onChange={handleChange} value={values.user_name} type='string' required/>
+              <Input id='user_name' onChange={(e) => setUser_name(e.target.value)} value={user_name} type='string' required/>
               <FormLabel>Password</FormLabel>
-              <Input id='password' onChange={handleChange} value={values.password} type='string' required/>
+              <Input id='password' onChange={(e) => setPassword(e.target.value)} value={password} type='string' required/>
               <FormLabel>Email</FormLabel>
-              <Input id='email' onChange={handleChange} value={values.email} type='string' required/>
+              <Input id='email' onChange={(e) => setEmail(e.target.value)} value={email} type='string' required/>
               <FormLabel>Budget</FormLabel>
-              <Input id='budget' onChange={handleChange} value={values.budget} type='number' required/>
-            </FormControl>
+              <Input id='budget' onChange={(e) => setBudget(parseInt(e.target.value))} value={budget.toString()} type='number' required/>
             <button type='submit'>Register</button>
           </form>
             <a onClick={() => setIsToRegister(false)}>Already have an account</a>
