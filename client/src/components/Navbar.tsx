@@ -16,10 +16,15 @@ const Navbar = () => {
     const [isMobileNavMenuToggled, setIsMobileNavMenuToggled] = useState(false)
     const dispatch = useDispatch()
     const user = useSelector((state: RootState) => state.userAuthAndInfo.user)
-    const {user_id, user_name} = user
+    const {user_id} = user || {}
     const navigate = useNavigate()
-    console.log(user.user_name)
 
+
+  if(user !== null) {
+    const user_name = user.user_name
+    console.log(user_name)
+  }
+    
     const anchorRef = React.useRef<HTMLButtonElement>(null);
 
     const handleLogOut = (event: Event | React.SyntheticEvent) => {

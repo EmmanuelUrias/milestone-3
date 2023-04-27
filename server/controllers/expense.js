@@ -4,7 +4,7 @@ const { Op } = require('sequelize')
 
 // Get
 const getExpenses = async (req, res) => {
-    const { user_id } = req.params
+    const { user_id } = req.body
 
     const expenses = await Expense.findAll({ where: { user_id: user_id }})
 

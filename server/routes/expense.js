@@ -3,7 +3,7 @@ const { getExpenses, getThisMonthsExpenses, newExpense, updateExpense, deleteExp
 
 const router = express.Router()
 
-router.get('/:user_id', getExpenses)
+
 router.get('/:user_id', getThisMonthsExpenses)
 router.post('/:user_id', newExpense)
 router.patch('/:user_id', updateExpense)

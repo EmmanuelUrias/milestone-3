@@ -1,6 +1,9 @@
 import { Typography, Box } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import IndividualExpense from '../components/IndividualExpense'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../store'
+import { setExpenses } from '../ducks/userSlice'
 
 const ExpenseFeed = () => {
     // fetch all expenses for that month, make controller /:month and pass the month in through a Date() variable that has the month
@@ -8,48 +11,57 @@ const ExpenseFeed = () => {
 
     // display all expenses, pass down data to the IndividualExpense component
     //Input to add expense to the feed, make sure it updates without rerendering the page
-    const monthNames = [
-      "January", "February", "March", "April", "May", "June", 
-      "July", "August", "September", "October", "November", "December"
-    ]
+    const [expense_name, setExpense_name] = useState('')
+    const [expense_type, setExpense_type] = useState('')
+    const [expense_amount, setExpense_amount] = useState(0)
+    const dispatch = useDispatch()
+    const user = useSelector((state: RootState) => state.userAuthAndInfo.user)
+    const token = useSelector((state: RootState) => state.userAuthAndInfo.token)
+    const expenses = useSelector((state: RootState) => state.userAuthAndInfo.expenses)
+    const {user_id} = user || {}
     
-    const date = new Date()
-    const monthName = monthNames[date.getMonth()]
+    const newExpense = async (event: any) => {
+      event.preventDefualt()
 
-    const expenses = [
-      {
-        name: 'hello',
-        amount: 100
-      },
-      {
-        name: 'world',
-        amount: 50
-      },
-      {
-        name: 'hello',
-        amount: 100
-      },
-      {
-        name: 'world',
-        amount: 50
-      },
-      {
-        name: 'hello',
-        amount: 100
-      },
-      {
-        name: 'world',
-        amount: 50
+      const expense = {
+        expense_name: expense_name,
+        expense_type: expense_type,
+        expense_amount: expense_amount,
+        user_id: user_id
       }
-    ]
 
-    let total: number | undefined = 0
-
-    for (let i = 0; i < expenses.length; i++) {
-      total += expenses[i].amount
+      const newExpense = await fetch(`http://localhost:3005/expense/${user_id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(expense)
+      })
     }
-    
-    console.log(monthName)
+
+    const getExpenses = async () => {
+      const allExpenses = await fetch(`http://localhost:3005/expense/${user_id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      const expenses = await allExpenses.json()
+      console.log(expenses)
+
+      if(expenses) {
+        dispatch(setExpenses({
+          expenses: expenses,
+          user: user,
+          token: token
+        }))
+      }
+    }
+
+    useEffect(() => {
+      // getExpenses()
+    }, [])
 
   return (
     <Box sx={{
@@ -71,14 +83,16 @@ const ExpenseFeed = () => {
         height: '300px',
         overflowY: 'scroll'
       }}>
-        {expenses.map(({name, amount}) => (
+        {expenses.map(({expense_name, expense_amount}) => (
           <IndividualExpense 
-            name={name}
-            amount={amount}
+            name={expense_name}
+            amount={expense_amount}
           />
         ))}
-        {total}
       </Box>
+        <Box>
+          
+        </Box>
     </Box>
   )
 }

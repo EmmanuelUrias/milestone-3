@@ -44,9 +44,12 @@ export const userAuthAndInfoSlice = createSlice({
             state.token = null
             localStorage.removeItem('isUser')
             localStorage.removeItem('jwtToken')
+        },
+        setExpenses: (state: InitialState, action: PayloadAction<InitialState>) => {
+            state.expenses = action.payload.expenses
         }
     }
 })
 
-export const { setLogin, setLogout } = userAuthAndInfoSlice.actions
+export const { setLogin, setLogout, setExpenses } = userAuthAndInfoSlice.actions
 export default userAuthAndInfoSlice.reducer
