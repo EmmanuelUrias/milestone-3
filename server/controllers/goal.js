@@ -33,7 +33,6 @@ const newGoal = async (req, res) => {
     try {
         const { user_id } = req.params
         const { goal_amount } = req.body
-        console.log(goal_amount)
 
         const todaysDate = new Date()
         const thisMonth = new Date(todaysDate.setMonth(todaysDate.getMonth() - 1))

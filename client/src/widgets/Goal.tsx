@@ -1,8 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Box, Typography } from '@mui/material'
+import { useSelector } from 'react-redux'
+import { RootState } from '../store'
 
 const Goal = () => {
     // Displays the Goal amount and whether or not we are on track
+    const [goal, setGoal] = useState({})
+    const userJson = useSelector((state: RootState) => state.userAuthAndInfo.user)
+    const user = JSON.parse(userJson as unknown as string)
+
+    const getGoal = async () => {
+      const goalRes = await fetch(`http://localhost:3005/goal/${user.user_id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'applications/json'
+        }
+      })
+      const goal = goalRes.json()
+
+      setGoal(goal)
+    }
+
   let budget = 2200
   let expenses = 2000
   let goalAmount = 200

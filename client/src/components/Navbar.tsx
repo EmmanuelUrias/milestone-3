@@ -15,15 +15,11 @@ const Navbar = () => {
     const smallScreen = useMediaQuery('(min-width: 600px)')
     const [isMobileNavMenuToggled, setIsMobileNavMenuToggled] = useState(false)
     const dispatch = useDispatch()
-    const user = useSelector((state: RootState) => state.userAuthAndInfo.user)
-    const {user_id} = user || {}
+    const userJson = useSelector((state: RootState) => state.userAuthAndInfo.user)
+    const user = JSON.parse(userJson as unknown as string)
     const navigate = useNavigate()
 
-
-  if(user !== null) {
-    const user_name = user.user_name
-    console.log(user_name)
-  }
+    console.log(user.user_name)
     
     const anchorRef = React.useRef<HTMLButtonElement>(null);
 
@@ -41,7 +37,7 @@ const Navbar = () => {
     }
 
     const handleNavigate = (event: Event | React.SyntheticEvent) => {
-      navigate(`/account/${user_id}`)
+      navigate(`/account/${user.user_id}`)
     }
   
     const handleClose = (event: Event | React.SyntheticEvent) => {
@@ -146,7 +142,7 @@ const Navbar = () => {
                       autoFocusItem={open}
                       onKeyDown={handleListKeyDown}
                     >
-                      <MenuItem onClick={handleNavigate}>{user_name}</MenuItem>
+                      <MenuItem onClick={handleNavigate}>{user.user_name}</MenuItem>
                       <MenuItem onClick={handleLogOut}>Logout</MenuItem>
                     </MenuList>
                   </ClickAwayListener>
@@ -189,7 +185,7 @@ const Navbar = () => {
                                 autoFocusItem={open}
                                 onKeyDown={handleListKeyDown}
                               >
-                                <MenuItem onClick={handleNavigate}>{user_name}</MenuItem>
+                                <MenuItem onClick={handleNavigate}>{user.user_name}</MenuItem>
                                 <MenuItem onClick={handleLogOut}>Logout</MenuItem>
                               </MenuList>
                             </ClickAwayListener>

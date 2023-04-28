@@ -1,4 +1,4 @@
-import { Typography, Box, Input } from '@mui/material'
+import { Typography, Box, TextField } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import IndividualExpense from '../components/IndividualExpense'
 import { useDispatch, useSelector } from 'react-redux'
@@ -15,11 +15,12 @@ const ExpenseFeed = () => {
     const [expense_type, setExpense_type] = useState('')
     const [expense_amount, setExpense_amount] = useState(0)
     const dispatch = useDispatch()
-    const user = useSelector((state: RootState) => state.userAuthAndInfo.user)
+    const userJson = useSelector((state: RootState) => state.userAuthAndInfo.user)
+    const user = JSON.parse(userJson as unknown as string)
     const token = useSelector((state: RootState) => state.userAuthAndInfo.token)
     const expenses = useSelector((state: RootState) => state.userAuthAndInfo.expenses)
-    const {user_id} = user || {}
-    
+    console.log(expenses)
+
     const newExpense = async (event: any) => {
       event.preventDefualt()
 
@@ -27,10 +28,10 @@ const ExpenseFeed = () => {
         expense_name: expense_name,
         expense_type: expense_type,
         expense_amount: expense_amount,
-        user_id: user_id
+        user_id: user.user_id
       }
 
-      const newExpense = await fetch(`http://localhost:3005/expense/${user_id}`, {
+      const newExpense = await fetch(`http://localhost:3005/expense/${user.user_id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -40,7 +41,7 @@ const ExpenseFeed = () => {
     }
 
     const getExpenses = async () => {
-      const allExpenses = await fetch(`http://localhost:3005/expense/${user_id}`, {
+      const allExpenses = await fetch(`http://localhost:3005/expense/${user.user_id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
@@ -48,7 +49,6 @@ const ExpenseFeed = () => {
       })
 
       const expenses = await allExpenses.json()
-      console.log(expenses)
 
       if(expenses) {
         dispatch(setExpenses({
@@ -60,7 +60,7 @@ const ExpenseFeed = () => {
     }
 
     useEffect(() => {
-      // getExpenses()
+      getExpenses()
     }, [])
 
   return (
@@ -97,13 +97,13 @@ const ExpenseFeed = () => {
               flexDirection: 'column'
               }}>
             <Typography variant='h6'>Add Expense</Typography>
-              <Input onChange={(event) => setExpense_name(event.target.value)} value={expense_name} type='string' placeholder='Expense Name' required/>
+              <TextField onChange={(event) => setExpense_name(event.target.value)} value={expense_name} type='string' placeholder='Expense Name' required/>
             <Box sx={{
               display: 'flex',
               flexDirection: 'row'
             }}>
-              <Input sx={{width: '50%'}} onChange={(event) => setExpense_amount(parseInt(event.target.value))} value={expense_amount.toString()} type='number' placeholder='Expense Amount' required/>
-              <Input onChange={(event) => setExpense_type(event.target.value)} value={expense_type} type='string' placeholder='Expense Type'/>
+              <TextField sx={{width: '50%'}} onChange={(event) => setExpense_amount(parseInt(event.target.value))} value={expense_amount.toString()} type='number' placeholder='Expense Amount' required/>
+              <TextField onChange={(event) => setExpense_type(event.target.value)} value={expense_type} type='string' placeholder='Expense Type'/>
             </Box>
             </Box>
               <button type='submit'>Add Expense</button>

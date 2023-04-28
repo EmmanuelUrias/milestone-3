@@ -1,4 +1,4 @@
-import { Box, Typography, FormLabel, Input } from '@mui/material'
+import { Box, Typography, FormLabel, TextField } from '@mui/material'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -82,13 +82,13 @@ const LoginPage = () => {
           {message}
           <form onSubmit={register}>
               <FormLabel>Username</FormLabel>
-              <Input id='user_name' onChange={(event) => setUser_name(event.target.value)} value={user_name} type='string' required/>
+              <TextField id='user_name' onChange={(event) => setUser_name(event.target.value)} value={user_name} type='string' required/>
               <FormLabel>Password</FormLabel>
-              <Input id='password' onChange={(event) => setPassword(event.target.value)} value={password} type='string' required/>
+              <TextField id='password' onChange={(event) => setPassword(event.target.value)} value={password} type='string' required/>
               <FormLabel>Email</FormLabel>
-              <Input id='email' onChange={(event) => setEmail(event.target.value)} value={email} type='string' required/>
+              <TextField id='email' onChange={(event) => setEmail(event.target.value)} value={email} type='string' required/>
               <FormLabel>Budget</FormLabel>
-              <Input id='budget' onChange={(event) => setBudget(parseInt(event.target.value))} value={budget.toString()} type='number' required/>
+              <TextField id='budget' onChange={(event) => setBudget(parseInt(event.target.value))} value={budget.toString()} type='number' required/>
             <button type='submit'>Register</button>
           </form>
             <a onClick={() => setIsToRegister(false)}>Already have an account</a>
@@ -107,9 +107,9 @@ const LoginPage = () => {
         <form onSubmit={logIn}>
         <Typography variant='h3'>Log In</Typography>
           <FormLabel>Email</FormLabel>
-          <Input id='email' onChange={(event) => setEmail(event.target.value)} value={email} type='string' required/>
+          <TextField id='email' onChange={(event) => setEmail(event.target.value)} value={email} type='string' required/>
           <FormLabel>Password</FormLabel>
-          <Input id='password' onChange={(event) => setPassword(event.target.value)} value={password} type='string' required/> 
+          <TextField id='password' onChange={(event) => setPassword(event.target.value)} value={password} type='string' required/> 
           <button type='submit'>Log In</button>
           </form>
           <a onClick={() => setIsToRegister(true)}>Don't have an account</a>
