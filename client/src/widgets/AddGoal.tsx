@@ -18,10 +18,16 @@ const AddGoal = () => {
       const newGoal = await fetch(`http://localhost:3005/goal/${user.user_id}`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          Authorization: `The chosen one ${user.token}`
         },
         body: JSON.stringify(goal)
       })
+      if (!newGoal.ok) {
+        console.log('Failed to create new goal')
+        return
+      }
+    
+      console.log('New goal created successfully')
     }
 
 

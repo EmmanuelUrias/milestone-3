@@ -18,8 +18,6 @@ const Navbar = () => {
     const userJson = useSelector((state: RootState) => state.userAuthAndInfo.user)
     const user = JSON.parse(userJson as unknown as string)
     const navigate = useNavigate()
-
-    console.log(user.user_name)
     
     const anchorRef = React.useRef<HTMLButtonElement>(null);
 

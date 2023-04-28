@@ -34,7 +34,7 @@ const ExpenseFeed = () => {
       const newExpense = await fetch(`http://localhost:3005/expense/${user.user_id}`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          Authorization: `The chosen one ${token}`
         },
         body: JSON.stringify(expense)
       })
@@ -44,19 +44,18 @@ const ExpenseFeed = () => {
       const allExpenses = await fetch(`http://localhost:3005/expense/${user.user_id}`, {
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json'
+          Authorization: `The chosen one ${token}`
         }
       })
 
       const expenses = await allExpenses.json()
 
-      if(expenses) {
         dispatch(setExpenses({
           expenses: expenses,
           user: user,
           token: token
         }))
-      }
+      
     }
 
     useEffect(() => {
