@@ -182,6 +182,8 @@ const Navbar = () => {
                                 autoFocusItem={open}
                                 onKeyDown={handleListKeyDown}
                               >
+                                <MenuItem onClick={() => navigate('/home')}>Tracker</MenuItem>
+                                <MenuItem onClick={() => navigate('/tips')}>Tips</MenuItem>
                                 <MenuItem onClick={handleNavigate}>{user.user_name}</MenuItem>
                                 <MenuItem onClick={handleLogOut}>Logout</MenuItem>
                               </MenuList>

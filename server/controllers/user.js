@@ -14,27 +14,23 @@ const getUser = async (req, res) => {
     }
 }
 
-// Patch
+// Put
 const updateUser = async (req, res) => {
     try {
         const { user_id } = req.params
-        const { user_name, password, email, budget } = req.body
+        const { user_name, budget } = req.body
     
-        const updatedUser = await User.update({
+        const [numRowsUpdated, [updatedUser]] = await User.update({
             user_name: user_name,
-            password: password,
-            email: email,
             budget: budget
         }, {
             where: {
                 user_id: user_id
-            }
+            },
+            returning: true
         })
     
-        res.status(200).json({
-            message: 'User has been updated',
-            data: updatedUser
-        })
+        res.status(200).json({updatedUser})
     } catch (err) {
         console.log(err)
         res.status(404).json({ message: err.message })

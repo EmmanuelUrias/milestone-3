@@ -57,9 +57,6 @@ const LoginPage = () => {
     })
     const loggedInUser = await logInUser.json()
 
-    console.log(logInUser)
-    console.log(loggedInUser)
-
     if(loggedInUser) {
       dispatch(setLogin({
         user: loggedInUser.isUser,
