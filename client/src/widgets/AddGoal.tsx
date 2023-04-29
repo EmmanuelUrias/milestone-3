@@ -35,12 +35,21 @@ const AddGoal = () => {
 
 
   return (
-    <Box>
+    <Box sx={{
+      width: '95%',
+    }}>
       <form onSubmit={newGoal}>
-        <Typography variant='h6'>Add Goal</Typography>
+        <Box sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center'
+    }}>
+        <Typography variant='h6' sx={{color: '#3059BE', fontWeight: '800', fontSize: '1.2rem'}}>Add Goal</Typography>
         <TextField id='goal-amount' onChange={(event) => setGoal_amount(parseInt(event.target.value))} value={goal_amount.toString()} type='number' required/>
         <button type='submit'>Add Goal</button>
         <p style={{'width': '190px', 'marginLeft': '20px', 'color': 'red'} }><strong>{message}</strong></p>
+        </Box>
       </form>
     </Box>
   )

@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../store'
 
 const Goal = () => {
-    // Displays the Goal amount and whether or not we are on track
     const [goal, setGoal] = useState({
       goal_id: 0,
       goal_amount: 0,
@@ -15,6 +14,7 @@ const Goal = () => {
     const user = JSON.parse(userJson as unknown as string)
     const token = useSelector((state: RootState) => state.userAuthAndInfo.token)
     const budget = user.budget
+    const expenses = useSelector((state: RootState) => state.userAuthAndInfo.expenses)
 
     const getGoal = async () => {
       const goalRes = await fetch(`http://localhost:3005/goal/${user.user_id}`, {
@@ -28,14 +28,18 @@ const Goal = () => {
       setGoal(goal)
     }
 
-  let expenses = 2000
-  let goalAmount = goal.goal_amount
-  let onTrack
-  if (budget - goalAmount >= expenses) {
-    onTrack = true
-  } else {
-    onTrack = false
-  }
+    let totalExpenses = 0
+
+    for (let i = 0; i < expenses.length; i++){
+      totalExpenses += expenses[i].expense_amount
+    }  
+    let goalAmount = goal.goal_amount
+    let onTrack
+    if (budget - goalAmount >= totalExpenses) {
+      onTrack = true
+    } else {
+      onTrack = false
+    }
 
   useEffect(() => {
     getGoal()
@@ -43,17 +47,19 @@ const Goal = () => {
     
   return (
     <Box sx={{
-      backgroundColor: '#3059BE',
+      backgroundColor: '#A9AABC',
        borderRadius: '15px',
        display: 'flex',
        flexDirection: 'column',
        justifyContent: 'center',
        alignItems: 'center',
-       padding: '1rem'
+       padding: '1rem',
+       width: '80%',
+       marginTop: '0.7rem'
     }}>
-      <Typography>This Months Goal:</Typography>
-      <Typography>${goal.goal_amount}</Typography>
-      {onTrack ? 'On track 😁👍' : '😬'} 
+      <Typography sx={{color: '#3059BE', fontWeight: '800', fontSize: '1.2rem'}}>This Months Goal</Typography>
+      <Typography sx={{fontWeight: '600', fontSize: '1.1rem'}}>${goal.goal_amount}</Typography>
+      <Typography sx={{color: '#3059BE', fontWeight: '800', fontSize: '1.2rem', marginTop: '0.5rem'}}>{onTrack ? 'On track 😁👍' : '😬'} </Typography>
     </Box>
   )
 }

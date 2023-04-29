@@ -74,6 +74,7 @@ const ExpenseFeed = () => {
     <Box sx={{
       width: '40%',
       backgroundColor: '#A9AABC',
+      opacity: '0.8',
       borderRadius: '15px',
       padding: '0.75rem'
     }}>
@@ -93,6 +94,7 @@ const ExpenseFeed = () => {
       }}>
         {expenses.map(({expense_id, expense_name, expense_amount, expense_type}) => (
           <IndividualExpense 
+            key={expense_id}
             id={expense_id}
             name={expense_name}
             amount={expense_amount}
