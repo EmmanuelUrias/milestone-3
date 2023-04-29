@@ -24,7 +24,8 @@ function App() {
     dispatch(setLogin({
       user: userCookies as unknown as User,
       token: userToken,
-      expenses: []
+      expenses: [],
+      expense: null
     }))
   }
 

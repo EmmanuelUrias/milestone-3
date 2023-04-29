@@ -91,10 +91,12 @@ const ExpenseFeed = () => {
         height: '350px',
         overflowY: 'scroll'
       }}>
-        {expenses.map(({expense_name, expense_amount}) => (
+        {expenses.map(({expense_id, expense_name, expense_amount, expense_type}) => (
           <IndividualExpense 
+            id={expense_id}
             name={expense_name}
             amount={expense_amount}
+            type={expense_type}
           />
         ))}
       </Box>

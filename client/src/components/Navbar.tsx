@@ -12,7 +12,7 @@ import { User } from '../ducks/userSlice';
 
 const Navbar = () => {
     const [open, setOpen] = useState(false)
-    const smallScreen = useMediaQuery('(min-width: 600px)')
+    const smallScreen = useMediaQuery('(min-width: 800px)')
     const [isMobileNavMenuToggled, setIsMobileNavMenuToggled] = useState(false)
     const dispatch = useDispatch()
     const userJson = useSelector((state: RootState) => state.userAuthAndInfo.user)

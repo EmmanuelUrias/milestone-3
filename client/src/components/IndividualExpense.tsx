@@ -1,16 +1,33 @@
-import { Box, Typography } from '@mui/material'
+import { Box, Button, IconButton, Typography } from '@mui/material'
 import React from 'react'
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { RootState } from '../store';
+import { useSelector } from 'react-redux';
 
 interface Expense {
+  id: number,
   name: string,
-  amount: number
+  amount: number,
+  type: string
 }
 
-const IndividualExpense: React.FC<Expense> = ({name, amount}) => {
-    //fetch for each individual Id coming in from the props, SideNote: Might use some sort of state management for this data
+const IndividualExpense: React.FC<Expense> = ({id, name, amount, type}) => {
+  const userJson = useSelector((state: RootState) => state.userAuthAndInfo.user)
+  const user = JSON.parse(userJson as unknown as string)
+  const token = useSelector((state: RootState) => state.userAuthAndInfo.token)
 
-    //populate data from props
-  return (
+    const deleteExpense = async (event: any) => {
+      window.location.reload()
+      const deletedExpense = await fetch(`http://localhost:3005/expense/${user.user_id}/${id}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `The chosen one ${token}`
+        }
+      })
+    }
+
+    return (
     <Box sx={{
       backgroundColor: '#F8F8FF',
       width: '90%',
@@ -21,14 +38,30 @@ const IndividualExpense: React.FC<Expense> = ({name, amount}) => {
       justifyContent: 'space-between',
       alignItems: 'center'
     }}>
-      <Box marginLeft='20px'>
-        <Typography>{name}</Typography>
-        <Typography>{amount}</Typography>
+      <Box marginLeft='20px' padding='0.4rem'>
+        <Typography sx={{
+          color: '#3059BE',
+          fontWeight: '800',
+          fontSize: '1.1rem'
+        }}>{name}</Typography>
+        <Typography sx={{
+          fontWeight: '800',
+          fontSize: '1.1rem'
+        }}>${amount}</Typography>
       </Box>
       <Box marginRight='20px'>
-        <Typography>Type</Typography>
-        <Box>
-         {/* delete and edit button on hover*/} l
+        <Typography sx={{
+          color: '#3059BE',
+          fontWeight: '800',
+          fontSize: '1.1rem'
+        }}>{type}</Typography>
+        <Box sx={{
+          display: 'flex',
+          justifyContent: 'end'
+        }}>
+          <IconButton onClick={deleteExpense}>
+            <DeleteIcon />
+          </IconButton>
         </Box>
       </Box>
     </Box>

@@ -73,8 +73,7 @@ const updateExpense = async (req, res) => {
 
 // Delete
 const deleteExpense = async (req, res) => {
-    const { user_id } = req.params
-    const { expense_id } = req.body
+    const { user_id, expense_id } = req.params
 
     const deletedExpense = await Expense.destroy({
         where: {
