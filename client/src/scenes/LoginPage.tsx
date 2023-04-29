@@ -55,7 +55,8 @@ const LoginPage = () => {
       dispatch(setLogin({
         user: loggedInUser.isUser,
         token: loggedInUser.jwtToken,
-        expenses: []
+        expenses: [],
+        expense: null
       }))
     }
 

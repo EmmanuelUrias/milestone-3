@@ -22,13 +22,15 @@ interface Expense {
 interface InitialState {
     user: User | null,
     token: string | null,
-    expenses: Expense[]
+    expenses: Expense[],
+    expense: Expense | null
 }
 
 const initialState: InitialState = {
     user: null,
     token: null,
-    expenses: []
+    expenses: [],
+    expense: null
 }
 
 export const userAuthAndInfoSlice = createSlice({
@@ -47,9 +49,12 @@ export const userAuthAndInfoSlice = createSlice({
         },
         setExpenses: (state: InitialState, action: PayloadAction<InitialState>) => {
             state.expenses = action.payload.expenses
+        },
+        addExpense: (state: InitialState, action: PayloadAction<InitialState>) => {
+            state.expenses.push(action.payload.expense as Expense)
         }
     }
 })
 
-export const { setLogin, setLogout, setExpenses } = userAuthAndInfoSlice.actions
+export const { setLogin, setLogout, setExpenses, addExpense } = userAuthAndInfoSlice.actions
 export default userAuthAndInfoSlice.reducer

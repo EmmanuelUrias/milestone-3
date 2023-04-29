@@ -3,14 +3,9 @@ import React, { useEffect, useState } from 'react'
 import IndividualExpense from '../components/IndividualExpense'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../store'
-import { setExpenses } from '../ducks/userSlice'
+import { addExpense, setExpenses } from '../ducks/userSlice'
 
 const ExpenseFeed = () => {
-    // fetch all expenses for that month, make controller /:month and pass the month in through a Date() variable that has the month
-    // make sure the controller has the logic to differentiate between the months
-
-    // display all expenses, pass down data to the IndividualExpense component
-    //Input to add expense to the feed, make sure it updates without rerendering the page
     const [expense_name, setExpense_name] = useState('')
     const [expense_type, setExpense_type] = useState('')
     const [expense_amount, setExpense_amount] = useState(0)
@@ -29,9 +24,7 @@ const ExpenseFeed = () => {
         expense_type: expense_type
       }
 
-      console.log(expense)
-
-      const newExpense = await fetch(`http://localhost:3005/expense/${user.user_id}`, {
+      const newExpenseRes = await fetch(`http://localhost:3005/expense/${user.user_id}`, {
         method: 'POST',
         headers: {
           Authorization: `The chosen one ${token}`,
@@ -39,6 +32,15 @@ const ExpenseFeed = () => {
         },
         body: JSON.stringify(expense)
       })
+
+      const userExpense = await newExpenseRes.json()
+
+      dispatch(addExpense({
+        expenses: expenses,
+        user: user,
+        token: token,
+        expense: userExpense
+      }))
     }
 
     const getExpenses = async () => {
@@ -54,14 +56,15 @@ const ExpenseFeed = () => {
         dispatch(setExpenses({
           expenses: expenses,
           user: user,
-          token: token
+          token: token,
+          expense: null
         }))
       
     }
 
     useEffect(() => {
       getExpenses()
-    }, [])
+    }, [dispatch, expenses])
 
   return (
     <Box sx={{

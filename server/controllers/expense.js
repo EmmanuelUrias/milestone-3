@@ -40,6 +40,9 @@ const newExpense = async (req, res) => {
         time_stamp: new Date
     })
 
+    const expenses = await Expense.findAll({ where: { user_id: user_id }})
+
+
     res.status(200).json({
         message: 'new expense has been created',
         data: createNewExpense
