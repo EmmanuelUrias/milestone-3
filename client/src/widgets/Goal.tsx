@@ -24,8 +24,7 @@ const Goal = (smallScreen: any) => {
         }
       })
       const goal = await goalRes.json()
-
-      setGoal(goal)
+      if(goal) setGoal(goal)
     }
 
     let totalExpenses = 0

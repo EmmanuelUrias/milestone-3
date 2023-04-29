@@ -16,6 +16,12 @@ const register = async (req, res) => {
         const salt = await bcrypt.genSalt()
         const passWordHash = await bcrypt.hash(password, salt)
 
+        const isUser = await User.findOne({
+            where: { email: email }
+        })
+
+        if (isUser) return res.status(400).send('email is already in use')
+
         const savedRegisteredUser = await User.create({
             user_name,
             password: passWordHash,

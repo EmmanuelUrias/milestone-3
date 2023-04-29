@@ -32,7 +32,11 @@ const LoginPage = () => {
       body: JSON.stringify(user)
     })
 
-    setIsToRegister(false)
+    if(newUserRes.ok) {
+      setIsToRegister(false)
+    } else {
+      setMessage('That email is already in use')
+    }
   }
 
   const logIn = async (event: any) => {
@@ -42,6 +46,7 @@ const LoginPage = () => {
       email: email,
       password: password
     }
+    console.log(user)
 
     const logInUser = await fetch('http://localhost:3005/auth/login', {
       method: 'POST',
@@ -51,6 +56,9 @@ const LoginPage = () => {
       body: JSON.stringify(user)
     })
     const loggedInUser = await logInUser.json()
+
+    console.log(logInUser)
+    console.log(loggedInUser)
 
     if(loggedInUser) {
       dispatch(setLogin({
@@ -100,7 +108,7 @@ const LoginPage = () => {
         }
         }}>
           <Typography variant='h3' sx={{color: '#3059BE', fontWeight: '600'}}>Register</Typography>
-          {message}
+          <p style={{'color': 'red'}} >{message}</p>
           <form onSubmit={register}>
               <FormLabel sx={{color: '#3059BE', fontWeight: '600'}}>Username</FormLabel>
               <TextField id='user_name' onChange={(event) => setUser_name(event.target.value)} value={user_name} type='string' required/>
