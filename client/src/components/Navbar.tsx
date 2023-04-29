@@ -78,7 +78,6 @@ const Navbar = () => {
         alignItems: 'top',
         backgroundColor: '#F8F8FF',
         opacity: 0.7,
-        position: 'fixed'
       }}>
         <Typography variant='h4' color='#3059BE' marginTop={smallScreen ? '20px' : '7px'} marginLeft={smallScreen ? '0rem' : '0.7rem'} sx={{'& > *': {marginTop: '10px'}}}>
           Budget Buddy

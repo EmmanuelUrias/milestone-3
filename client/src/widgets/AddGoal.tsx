@@ -4,7 +4,7 @@ import { RootState } from '../store'
 import { Box, Button, TextField, Typography } from '@mui/material'
 import SendIcon from '@mui/icons-material/Send';
 
-const AddGoal = () => {
+const AddGoal = (smallScreen: any) => {
     // Input to add goal to the Goal component to update without rerendering the page
     const [goal_amount, setGoal_amount] = useState(0)
     const [message, setMessage] = useState('')

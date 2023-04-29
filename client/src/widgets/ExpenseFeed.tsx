@@ -9,7 +9,7 @@ import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutli
 import TitleIcon from '@mui/icons-material/Title';
 import SendIcon from '@mui/icons-material/Send';
 
-const ExpenseFeed = () => {
+const ExpenseFeed = (smallScreen: any) => {
     const [expense_name, setExpense_name] = useState('')
     const [expense_type, setExpense_type] = useState('')
     const [expense_amount, setExpense_amount] = useState(0)
@@ -71,12 +71,19 @@ const ExpenseFeed = () => {
     }, [])
 
   return (
-    <Box sx={{
+    <Box sx={ !smallScreen ? {
       width: '40%',
       backgroundColor: '#A9AABC',
       opacity: '0.9',
       borderRadius: '15px',
       padding: '0.75rem'
+    } : {
+      width: '95%',
+      backgroundColor: '#A9AABC',
+      opacity: '0.9',
+      borderRadius: '15px',
+      padding: '0.75rem',
+      marginTop: '5%'
     }}>
       <Box sx={{
         display: 'flex',
@@ -124,15 +131,20 @@ const ExpenseFeed = () => {
               <TextField id='expense_type' InputProps={{ startAdornment: ( <InputAdornment position='start'><TitleIcon/></InputAdornment> ) }} onChange={(event) => setExpense_type(event.target.value)} value={expense_type} type='string' placeholder='Expense Type'/>
             </Box>
             </Box>
+            <Box sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems:'center'
+            }}>
               <Button variant='contained' endIcon={<SendIcon />} type='submit' sx={{ 
                 fontWeight: '700',
                 marginTop: '7px',
-                marginLeft: '33%',
                 backgroundColor: '#3059BE'
                  }}
                  >
                   Add Expense
               </Button>
+            </Box>
           </form>
         </Box>
     </Box>

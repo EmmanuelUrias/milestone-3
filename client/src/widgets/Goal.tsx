@@ -3,7 +3,7 @@ import { Box, Typography } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { RootState } from '../store'
 
-const Goal = () => {
+const Goal = (smallScreen: any) => {
     const [goal, setGoal] = useState({
       goal_id: 0,
       goal_amount: 0,
