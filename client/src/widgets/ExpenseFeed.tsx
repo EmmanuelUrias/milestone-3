@@ -19,21 +19,23 @@ const ExpenseFeed = () => {
     const user = JSON.parse(userJson as unknown as string)
     const token = useSelector((state: RootState) => state.userAuthAndInfo.token)
     const expenses = useSelector((state: RootState) => state.userAuthAndInfo.expenses)
-    console.log(expenses)
 
     const newExpense = async (event: any) => {
       event.preventDefault()
 
       const expense = {
         expense_name: expense_name,
-        expense_type: expense_type,
-        expense_amount: expense_amount
+        expense_amount: expense_amount,
+        expense_type: expense_type
       }
+
+      console.log(expense)
 
       const newExpense = await fetch(`http://localhost:3005/expense/${user.user_id}`, {
         method: 'POST',
         headers: {
-          Authorization: `The chosen one ${token}`
+          Authorization: `The chosen one ${token}`,
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify(expense)
       })
@@ -48,7 +50,6 @@ const ExpenseFeed = () => {
       })
 
       const expenses = await allExpenses.json()
-      console.log(`yo ${expenses}`)
 
         dispatch(setExpenses({
           expenses: expenses,

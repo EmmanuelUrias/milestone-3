@@ -21,7 +21,8 @@ const AddGoal = () => {
       const newGoal = await fetch(`http://localhost:3005/goal/${user.user_id}`, {
         method: 'POST',
         headers: {
-          Authorization: `The chosen one ${token}`
+          Authorization: `The chosen one ${token}`,
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify(goal)
       })
