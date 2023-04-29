@@ -10,9 +10,9 @@ const HomePage = () => {
     // add boolean state so if it's a small screen we make the nav horizontal and the widgets vertical
   return (
     <Box sx={{width: '100%'}}>
-      <Box sx={{display: 'flex', flexDirection: 'row'}}>
+      <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: '4%'}}>
         <ExpenseFeed />
-        <Box>
+        <Box sx={{marginLeft: '5%'}}>
           <MonthlyExpenseAmount />
           <Goal />
           <AddGoal />

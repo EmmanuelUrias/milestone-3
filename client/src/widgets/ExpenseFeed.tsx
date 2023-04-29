@@ -1,9 +1,13 @@
-import { Typography, Box, TextField } from '@mui/material'
+import { Typography, Box, TextField, InputAdornment, Button } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import IndividualExpense from '../components/IndividualExpense'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../store'
 import { addExpense, setExpenses } from '../ducks/userSlice'
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
+import TitleIcon from '@mui/icons-material/Title';
+import SendIcon from '@mui/icons-material/Send';
 
 const ExpenseFeed = () => {
     const [expense_name, setExpense_name] = useState('')
@@ -16,7 +20,7 @@ const ExpenseFeed = () => {
     const expenses = useSelector((state: RootState) => state.userAuthAndInfo.expenses)
 
     const newExpense = async (event: any) => {
-      //event.preventDefault()
+      //event.preventDefault() // If you uncomment this it will not update the feed, if you want it to update without refreshing put dispatch, expenses, newExpense in the useEffect --> NOTE: it will make a large amount of requests a second
 
       const expense = {
         expense_name: expense_name,
@@ -69,8 +73,9 @@ const ExpenseFeed = () => {
   return (
     <Box sx={{
       width: '40%',
-      backgroundColor: '#3059BE',
-      borderRadius: '15px'
+      backgroundColor: '#A9AABC',
+      borderRadius: '15px',
+      padding: '0.75rem'
     }}>
       <Box sx={{
         display: 'flex',
@@ -78,12 +83,12 @@ const ExpenseFeed = () => {
         justifyContent: 'center',
         alignItems: 'center'
       }}>
-        <Typography variant='h5'>
+        <Typography variant='h5' sx={{color: '#3059BE', fontWeight: '900', fontSize: '1.8rem'}}>
             Expenses
         </Typography>
       </Box>
       <Box sx={{
-        height: '300px',
+        height: '350px',
         overflowY: 'scroll'
       }}>
         {expenses.map(({expense_name, expense_amount}) => (
@@ -97,19 +102,33 @@ const ExpenseFeed = () => {
           <form onSubmit={newExpense}>
             <Box sx={{
               display: 'flex',
-              flexDirection: 'column'
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              color: 'success',
+              '& fieldset': {
+                borderColor: '#3059BE'
+              }
               }}>
-            <Typography variant='h6'>Add Expense</Typography>
-              <TextField id='expense_name' onChange={(event) => setExpense_name(event.target.value)} value={expense_name} type='string' placeholder='Expense Name' required/>
+            <Typography variant='h5' sx={{color: '#3059BE', fontWeight: '900', margin: '0.5rem'}}>Add Expense</Typography>
+              <TextField id='expense_name' InputProps={{ startAdornment: ( <InputAdornment position='start'><DriveFileRenameOutlineIcon/></InputAdornment> ) }} sx={{width: '85%', marginBottom: '7px'}} onChange={(event) => setExpense_name(event.target.value)} value={expense_name} type='string' placeholder='Expense Name' required/>
             <Box sx={{
               display: 'flex',
               flexDirection: 'row'
             }}>
-              <TextField id='expense_amount' sx={{width: '50%'}} onChange={(event) => setExpense_amount(parseInt(event.target.value))} value={expense_amount.toString()} type='number' placeholder='Expense Amount' required/>
-              <TextField id='expense_type' onChange={(event) => setExpense_type(event.target.value)} value={expense_type} type='string' placeholder='Expense Type'/>
+              <TextField id='expense_amount' InputProps={{ startAdornment: ( <InputAdornment position='start'><AttachMoneyIcon/></InputAdornment> ) }} sx={{width: '50%', marginRight: '7px'}} onChange={(event) => setExpense_amount(parseInt(event.target.value))} value={expense_amount.toString()} type='number' placeholder='Expense Amount' required/>
+              <TextField id='expense_type' InputProps={{ startAdornment: ( <InputAdornment position='start'><TitleIcon/></InputAdornment> ) }} onChange={(event) => setExpense_type(event.target.value)} value={expense_type} type='string' placeholder='Expense Type'/>
             </Box>
             </Box>
-              <button type='submit'>Add Expense</button>
+              <Button variant='contained' endIcon={<SendIcon />} type='submit' sx={{ 
+                fontWeight: '700',
+                marginTop: '7px',
+                marginLeft: '33%',
+                backgroundColor: '#3059BE'
+                 }}
+                 >
+                  Add Expense
+              </Button>
           </form>
         </Box>
     </Box>
