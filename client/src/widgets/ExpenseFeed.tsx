@@ -71,14 +71,12 @@ const ExpenseFeed = (smallScreen: any) => {
     }, [])
 
   return (
-    <Box sx={ !smallScreen ? {
-      width: '40%',
+    <Box width={ !smallScreen ? '40%' : '95%'} sx={ !smallScreen ? { // weird bug with the width
       backgroundColor: '#A9AABC',
       opacity: '0.9',
       borderRadius: '15px',
       padding: '0.75rem'
     } : {
-      width: '95%',
       backgroundColor: '#A9AABC',
       opacity: '0.9',
       borderRadius: '15px',

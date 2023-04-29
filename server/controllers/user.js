@@ -41,7 +41,6 @@ const updateUser = async (req, res) => {
     }
 }
 
-// Delete --> Note: maybe should be in auth
 const deleteUser = async (req, res) => {
     try {
         const { user_id } = req.params

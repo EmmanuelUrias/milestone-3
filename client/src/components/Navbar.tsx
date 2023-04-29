@@ -101,10 +101,10 @@ const Navbar = () => {
           '& > *': {marginLeft: '20px'},
           '& > *:hover': {cursor: 'pointer'}
         }}>
-          <Link underline='hover' color='#3059BE' variant='h5' sx={{marginBottom: '20px', marginRight: '10px'}}>
+          <Link onClick={() => navigate('/home')} underline='hover' color='#3059BE' variant='h5' sx={{marginBottom: '20px', marginRight: '10px'}}>
             <AddchartIcon/> Tracker
           </Link>
-          <Link underline='hover' color='#3059BE' variant='h5' sx={{marginBottom: '20px', marginRight: '10px'}}>
+          <Link onClick={() => navigate('/tips')} underline='hover' color='#3059BE' variant='h5' sx={{marginBottom: '20px', marginRight: '10px'}}>
             <TipsAndUpdatesIcon /> Tips
           </Link>
           <Box>
