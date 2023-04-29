@@ -48,7 +48,7 @@ const newGoal = async (req, res) => {
 
         await Goal.create({
             goal_amount: goal_amount,
-            user_id,
+            user_id: user_id,
             time_stamp: new Date
         })
 

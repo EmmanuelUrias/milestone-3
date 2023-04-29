@@ -6,8 +6,11 @@ import { Box, TextField, Typography } from '@mui/material'
 const AddGoal = () => {
     // Input to add goal to the Goal component to update without rerendering the page
     const [goal_amount, setGoal_amount] = useState(0)
+    const [message, setMessage] = useState('')
     const userJson = useSelector((state: RootState) => state.userAuthAndInfo.user)
     const user = JSON.parse(userJson as unknown as string)
+    const token = useSelector((state: RootState) => state.userAuthAndInfo.token)
+
 
     const newGoal = async(event: any) => {
       event.preventDefault()
@@ -18,25 +21,25 @@ const AddGoal = () => {
       const newGoal = await fetch(`http://localhost:3005/goal/${user.user_id}`, {
         method: 'POST',
         headers: {
-          Authorization: `The chosen one ${user.token}`
+          Authorization: `The chosen one ${token}`
         },
         body: JSON.stringify(goal)
       })
       if (!newGoal.ok) {
-        console.log('Failed to create new goal')
+        setMessage('Failed to create new goal, maybe you already made one this month')
         return
       }
-    
-      console.log('New goal created successfully')
+      setMessage('New goal created successfully')
     }
 
 
   return (
     <Box>
-      <form>
+      <form onSubmit={newGoal}>
         <Typography variant='h6'>Add Goal</Typography>
-        <TextField onChange={(event) => setGoal_amount(parseInt(event.target.value))} value={goal_amount.toString()} type='number' required/>
+        <TextField id='goal-amount' onChange={(event) => setGoal_amount(parseInt(event.target.value))} value={goal_amount.toString()} type='number' required/>
         <button type='submit'>Add Goal</button>
+        <p style={{'width': '190px', 'marginLeft': '20px', 'color': 'red'} }><strong>{message}</strong></p>
       </form>
     </Box>
   )

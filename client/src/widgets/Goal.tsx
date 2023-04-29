@@ -40,8 +40,6 @@ const Goal = () => {
   useEffect(() => {
     getGoal()
   }, [])
-
-  console.log(goal)
     
   return (
     <Box sx={{

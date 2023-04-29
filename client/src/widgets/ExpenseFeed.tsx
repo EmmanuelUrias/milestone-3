@@ -22,13 +22,12 @@ const ExpenseFeed = () => {
     console.log(expenses)
 
     const newExpense = async (event: any) => {
-      event.preventDefualt()
+      event.preventDefault()
 
       const expense = {
         expense_name: expense_name,
         expense_type: expense_type,
-        expense_amount: expense_amount,
-        user_id: user.user_id
+        expense_amount: expense_amount
       }
 
       const newExpense = await fetch(`http://localhost:3005/expense/${user.user_id}`, {
@@ -49,6 +48,7 @@ const ExpenseFeed = () => {
       })
 
       const expenses = await allExpenses.json()
+      console.log(`yo ${expenses}`)
 
         dispatch(setExpenses({
           expenses: expenses,
@@ -96,13 +96,13 @@ const ExpenseFeed = () => {
               flexDirection: 'column'
               }}>
             <Typography variant='h6'>Add Expense</Typography>
-              <TextField onChange={(event) => setExpense_name(event.target.value)} value={expense_name} type='string' placeholder='Expense Name' required/>
+              <TextField id='expense_name' onChange={(event) => setExpense_name(event.target.value)} value={expense_name} type='string' placeholder='Expense Name' required/>
             <Box sx={{
               display: 'flex',
               flexDirection: 'row'
             }}>
-              <TextField sx={{width: '50%'}} onChange={(event) => setExpense_amount(parseInt(event.target.value))} value={expense_amount.toString()} type='number' placeholder='Expense Amount' required/>
-              <TextField onChange={(event) => setExpense_type(event.target.value)} value={expense_type} type='string' placeholder='Expense Type'/>
+              <TextField id='expense_amount' sx={{width: '50%'}} onChange={(event) => setExpense_amount(parseInt(event.target.value))} value={expense_amount.toString()} type='number' placeholder='Expense Amount' required/>
+              <TextField id='expense_type' onChange={(event) => setExpense_type(event.target.value)} value={expense_type} type='string' placeholder='Expense Type'/>
             </Box>
             </Box>
               <button type='submit'>Add Expense</button>
