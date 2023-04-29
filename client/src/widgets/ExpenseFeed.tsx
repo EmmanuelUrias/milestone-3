@@ -74,7 +74,7 @@ const ExpenseFeed = () => {
     <Box sx={{
       width: '40%',
       backgroundColor: '#A9AABC',
-      opacity: '0.8',
+      opacity: '0.9',
       borderRadius: '15px',
       padding: '0.75rem'
     }}>

@@ -27,7 +27,8 @@ const MonthlyExpenseAmount = () => {
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      width: '80%'
+      width: '80%',
+      opacity: '0.9'
     }}>
       <Typography sx={{color: '#3059BE', fontWeight: '800', fontSize: '1.2rem'}}>Amount Spent</Typography>
       <Typography sx={{fontWeight: '600', fontSize: '1.1rem'}}>${totalExpenses}</Typography>

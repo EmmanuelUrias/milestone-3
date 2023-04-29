@@ -55,7 +55,8 @@ const Goal = () => {
        alignItems: 'center',
        padding: '1rem',
        width: '80%',
-       marginTop: '0.7rem'
+       marginTop: '0.7rem',
+       opacity: '0.9'
     }}>
       <Typography sx={{color: '#3059BE', fontWeight: '800', fontSize: '1.2rem'}}>This Months Goal</Typography>
       <Typography sx={{fontWeight: '600', fontSize: '1.1rem'}}>${goal.goal_amount}</Typography>

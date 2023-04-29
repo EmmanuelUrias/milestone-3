@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../store'
-import { Box, TextField, Typography } from '@mui/material'
+import { Box, Button, TextField, Typography } from '@mui/material'
+import SendIcon from '@mui/icons-material/Send';
 
 const AddGoal = () => {
     // Input to add goal to the Goal component to update without rerendering the page
@@ -37,6 +38,8 @@ const AddGoal = () => {
   return (
     <Box sx={{
       width: '95%',
+      marginTop: '1rem',
+      opacity: '0.9'
     }}>
       <form onSubmit={newGoal}>
         <Box sx={{
@@ -47,7 +50,11 @@ const AddGoal = () => {
     }}>
         <Typography variant='h6' sx={{color: '#3059BE', fontWeight: '800', fontSize: '1.2rem'}}>Add Goal</Typography>
         <TextField id='goal-amount' onChange={(event) => setGoal_amount(parseInt(event.target.value))} value={goal_amount.toString()} type='number' required/>
-        <button type='submit'>Add Goal</button>
+        <Button variant='contained' endIcon={<SendIcon />} type='submit' sx={{ 
+                fontWeight: '700',
+                marginTop: '7px',
+                backgroundColor: '#3059BE'
+                 }}>Add Goal</Button>
         <p style={{'width': '190px', 'marginLeft': '20px', 'color': 'red'} }><strong>{message}</strong></p>
         </Box>
       </form>
