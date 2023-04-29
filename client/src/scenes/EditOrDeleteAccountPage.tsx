@@ -62,19 +62,19 @@ function EditOrDeleteAccountPage() {
   }  
 
   const deleteUser = async () => {
-    window.location.reload()
     const deletedUser = await fetch(`http://localhost:3005/user/${user.user_id}`, {
       method: 'DELETE',
       headers: {
-        Authorization: `The chosen one ${token}`,
-        'Content-Type': 'application/json'
+        Authorization: `The chosen one ${token}`
       }
     })
-
+    
     dispatch(setLogout())
-
+    
     localStorage.removeItem('jwtToken')
     localStorage.removeItem('isUser')
+
+    window.location.reload()
   }
 
   return (
