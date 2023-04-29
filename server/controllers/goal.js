@@ -55,7 +55,7 @@ const newGoal = async (req, res) => {
         const goal = await Goal.findOne({
             where: {
                 user_id: user_id,
-                time_stamp: { [Op.gte]: aMonthAgo }
+                time_stamp: { [Op.gte]: thisMonth }
             }
         })
 

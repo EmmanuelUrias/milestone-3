@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Typography } from '@mui/material'
+import { Box, IconButton, Typography } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { RootState } from '../store'
+import DeleteIcon from '@mui/icons-material/Delete';
+
 
 const Goal = (smallScreen: any) => {
     const [goal, setGoal] = useState({
@@ -25,6 +27,16 @@ const Goal = (smallScreen: any) => {
       })
       const goal = await goalRes.json()
       if(goal) setGoal(goal)
+    }
+
+    const deleteGoal = async () => {
+      const deletedExpense = await fetch(`http://localhost:3005/goal/${user.user_id}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `The chosen one ${token}`
+        }
+      })
+      window.location.reload()
     }
 
     let totalExpenses = 0
@@ -58,7 +70,11 @@ const Goal = (smallScreen: any) => {
        opacity: '0.9'
     }}>
       <Typography sx={{color: '#3059BE', fontWeight: '800', fontSize: '1.2rem'}}>This Months Goal</Typography>
-      <Typography sx={{fontWeight: '600', fontSize: '1.1rem'}}>${goal.goal_amount}</Typography>
+      <Typography sx={{fontWeight: '600', fontSize: '1.1rem'}}>
+        ${goal.goal_amount}
+        <IconButton onClick={deleteGoal}>
+            <DeleteIcon />
+          </IconButton></Typography>
       <Typography sx={{color: '#3059BE', fontWeight: '800', fontSize: '1.2rem', marginTop: '0.5rem'}}>{onTrack ? 'On track 😁👍' : '😬'} </Typography>
     </Box>
   )

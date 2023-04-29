@@ -1,6 +1,5 @@
 import { Box, Button, IconButton, Typography } from '@mui/material'
 import React from 'react'
-import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { RootState } from '../store';
 import { useSelector } from 'react-redux';
@@ -18,13 +17,13 @@ const IndividualExpense: React.FC<Expense> = ({id, name, amount, type}) => {
   const token = useSelector((state: RootState) => state.userAuthAndInfo.token)
 
     const deleteExpense = async (event: any) => {
-      window.location.reload()
       const deletedExpense = await fetch(`http://localhost:3005/expense/${user.user_id}/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `The chosen one ${token}`
         }
       })
+      window.location.reload()
     }
 
     return (

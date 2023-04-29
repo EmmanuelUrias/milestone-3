@@ -14,7 +14,7 @@ const AddGoal = (smallScreen: any) => {
 
 
     const newGoal = async(event: any) => {
-      event.preventDefault()
+      // event.preventDefault()
       const goal = {
         goal_amount: goal_amount
       }
@@ -27,11 +27,8 @@ const AddGoal = (smallScreen: any) => {
         },
         body: JSON.stringify(goal)
       })
-      if (!newGoal.ok) {
-        setMessage('Failed to create new goal, maybe you already made one this month')
-        return
-      }
-      setMessage('New goal created successfully')
+      if (!newGoal.ok) setMessage('Failed to create new goal, maybe you already made one this month')
+      
     }
 
 
