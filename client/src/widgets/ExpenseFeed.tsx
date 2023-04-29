@@ -16,7 +16,7 @@ const ExpenseFeed = () => {
     const expenses = useSelector((state: RootState) => state.userAuthAndInfo.expenses)
 
     const newExpense = async (event: any) => {
-      event.preventDefault()
+      //event.preventDefault()
 
       const expense = {
         expense_name: expense_name,
@@ -64,7 +64,7 @@ const ExpenseFeed = () => {
 
     useEffect(() => {
       getExpenses()
-    }, [dispatch, expenses])
+    }, [])
 
   return (
     <Box sx={{
