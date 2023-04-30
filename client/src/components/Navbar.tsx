@@ -5,10 +5,9 @@ import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch, useSelector } from 'react-redux';
-import { setLogout, userAuthAndInfoSlice } from '../ducks/userSlice';
+import { setLogout } from '../ducks/userSlice';
 import { RootState } from '../store';
 import { useNavigate } from 'react-router-dom';
-import { User } from '../ducks/userSlice';
 
 const Navbar = () => {
     const [open, setOpen] = useState(false)
@@ -48,9 +47,7 @@ const Navbar = () => {
   
       setOpen(false);
     };
-
-    //const logOut = setLogout() reroute to login page
-  
+      
     function handleListKeyDown(event: React.KeyboardEvent) {
       if (event.key === 'Tab') {
         event.preventDefault();
