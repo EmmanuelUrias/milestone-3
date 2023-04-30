@@ -11,7 +11,7 @@ const HomePage = () => {
     <Box>
       { smallScreen ? (
         <Box sx={{width: '100%'}}>
-          <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: '4%'}}>
+          <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: '4%'}}>
             <ExpenseFeed smallScreen={smallScreen}/>
             <Box sx={{marginLeft: '5%'}}>
               <MonthlyExpenseAmount smallScreen={smallScreen}/>
