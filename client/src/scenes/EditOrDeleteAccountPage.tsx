@@ -28,7 +28,7 @@ function EditOrDeleteAccountPage() {
       time_stamp: user.time_stamp
     }
 
-    const newUserRes = await fetch(`http://localhost:3005/${user.user_id}`, {
+    const newUserRes = await fetch(`http://budgetbuddy-env.eba-hjjiskth.us-east-1.elasticbeanstalk.com/user/${user.user_id}`, {
       method: 'PUT',
       headers: {
         Authorization: `The chosen one ${token}`,
