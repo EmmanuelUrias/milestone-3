@@ -24,7 +24,7 @@ const LoginPage = () => {
       budget: budget
     }
 
-    const newUserRes = await fetch('http://localhost:3005/auth/register', {
+    const newUserRes = await fetch('http://budgetbuddy-env.eba-hjjiskth.us-east-1.elasticbeanstalk.com/auth/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -48,7 +48,7 @@ const LoginPage = () => {
     }
     console.log(user)
 
-    const logInUser = await fetch('http://localhost:3005/auth/login', {
+    const logInUser = await fetch('http://budgetbuddy-env.eba-hjjiskth.us-east-1.elasticbeanstalk.com/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

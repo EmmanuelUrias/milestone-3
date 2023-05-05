@@ -17,7 +17,7 @@ const IndividualExpense: React.FC<Expense> = ({id, name, amount, type}) => {
   const token = useSelector((state: RootState) => state.userAuthAndInfo.token)
 
     const deleteExpense = async (event: any) => {
-      const deletedExpense = await fetch(`http://localhost:3005/expense/${user.user_id}/${id}`, {
+      const deletedExpense = await fetch(`http://budgetbuddy-env.eba-hjjiskth.us-east-1.elasticbeanstalk.com/${user.user_id}/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `The chosen one ${token}`

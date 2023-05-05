@@ -28,7 +28,7 @@ const ExpenseFeed = (smallScreen: any) => {
         expense_type: expense_type
       }
 
-      const newExpenseRes = await fetch(`http://localhost:3005/expense/${user.user_id}`, {
+      const newExpenseRes = await fetch(`http://budgetbuddy-env.eba-hjjiskth.us-east-1.elasticbeanstalk.com/${user.user_id}`, {
         method: 'POST',
         headers: {
           Authorization: `The chosen one ${token}`,
@@ -48,7 +48,7 @@ const ExpenseFeed = (smallScreen: any) => {
     }
 
     const getExpenses = async () => {
-      const allExpenses = await fetch(`http://localhost:3005/expense/${user.user_id}`, {
+      const allExpenses = await fetch(`http://budgetbuddy-env.eba-hjjiskth.us-east-1.elasticbeanstalk.com/${user.user_id}`, {
         method: 'GET',
         headers: {
           Authorization: `The chosen one ${token}`

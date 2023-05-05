@@ -28,7 +28,7 @@ function EditOrDeleteAccountPage() {
       time_stamp: user.time_stamp
     }
 
-    const newUserRes = await fetch(`http://localhost:3005/user/${user.user_id}`, {
+    const newUserRes = await fetch(`http://budgetbuddy-env.eba-hjjiskth.us-east-1.elasticbeanstalk.com/${user.user_id}`, {
       method: 'PUT',
       headers: {
         Authorization: `The chosen one ${token}`,
@@ -37,7 +37,7 @@ function EditOrDeleteAccountPage() {
       body: JSON.stringify(newUser)
     })
     
-    const getUpdatedUser = await fetch(`http://localhost:3005/user/${user.user_id}`, {
+    const getUpdatedUser = await fetch(`http://budgetbuddy-env.eba-hjjiskth.us-east-1.elasticbeanstalk.com/${user.user_id}`, {
       method: 'GET',
       headers: {
         Authorization: `The chosen one ${token}`
@@ -62,7 +62,7 @@ function EditOrDeleteAccountPage() {
   }  
 
   const deleteUser = async () => {
-    const deletedUser = await fetch(`http://localhost:3005/user/${user.user_id}`, {
+    const deletedUser = await fetch(`http://budgetbuddy-env.eba-hjjiskth.us-east-1.elasticbeanstalk.com/${user.user_id}`, {
       method: 'DELETE',
       headers: {
         Authorization: `The chosen one ${token}`

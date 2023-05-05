@@ -2,10 +2,6 @@ const db = require('../models')
 const { Goal } = db
 const { Op } = require('sequelize')
 
-let year
-let month
-let day
-let hour
 
 // Get 
 const findGoals = async (req, res) => {

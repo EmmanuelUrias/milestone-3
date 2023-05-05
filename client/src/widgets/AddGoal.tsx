@@ -19,7 +19,7 @@ const AddGoal = (smallScreen: any) => {
         goal_amount: goal_amount
       }
 
-      const newGoal = await fetch(`http://localhost:3005/goal/${user.user_id}`, {
+      const newGoal = await fetch(`http://budgetbuddy-env.eba-hjjiskth.us-east-1.elasticbeanstalk.com/${user.user_id}`, {
         method: 'POST',
         headers: {
           Authorization: `The chosen one ${token}`,
