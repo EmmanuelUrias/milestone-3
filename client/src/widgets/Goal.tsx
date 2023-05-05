@@ -19,7 +19,7 @@ const Goal = (smallScreen: any) => {
     const expenses = useSelector((state: RootState) => state.userAuthAndInfo.expenses)
 
     const getGoal = async () => {
-      const goalRes = await fetch(`http://budgetbuddy-env.eba-hjjiskth.us-east-1.elasticbeanstalk.com/${user.user_id}`, {
+      const goalRes = await fetch(`http://budgetbuddy-env.eba-hjjiskth.us-east-1.elasticbeanstalk.com/goal/${user.user_id}`, {
         method: 'GET',
         headers: {
           Authorization: `The chosen one ${token}`
@@ -30,7 +30,7 @@ const Goal = (smallScreen: any) => {
     }
 
     const deleteGoal = async () => {
-      const deletedExpense = await fetch(`http://budgetbuddy-env.eba-hjjiskth.us-east-1.elasticbeanstalk.com/${user.user_id}`, {
+      const deletedExpense = await fetch(`http://budgetbuddy-env.eba-hjjiskth.us-east-1.elasticbeanstalk.com/goal/${user.user_id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `The chosen one ${token}`
