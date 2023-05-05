@@ -2,6 +2,11 @@ const db = require('../models')
 const { Expense } = db
 const { Op } = require('sequelize')
 
+let year
+let month
+let day
+let hour
+
 // Get
 const getExpenses = async (req, res) => {
     const { user_id } = req.body

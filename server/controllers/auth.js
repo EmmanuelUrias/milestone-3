@@ -3,6 +3,11 @@ const jwt = require('jsonwebtoken')
 const db = require('../models')
 const { User } = db
 
+let year
+let month
+let day
+let hour
+
 // Register
 const register = async (req, res) => {
     try {
