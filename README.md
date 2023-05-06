@@ -89,3 +89,8 @@ NODE_ENV=development
 
 Now your app should be up and running
 
+## Bugs
+
+- In vercel when you refresh the page the page will crash, if you revisit the page the problem wil fix itself, but it's verbose to do that everytime you send data to the backend
+- AWS backend can't be used with Vercel because Vercel(https) can't make requests to my AWS backend(http), I know this issue is solvable but I ran out of time
+
