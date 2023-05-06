@@ -15,6 +15,7 @@ const Navbar = () => {
     const [isMobileNavMenuToggled, setIsMobileNavMenuToggled] = useState(false)
     const dispatch = useDispatch()
     const userJson = useSelector((state: RootState) => state.userAuthAndInfo.user)
+    console.log(userJson)
     const user = JSON.parse(userJson as unknown as string)
     const navigate = useNavigate()
     

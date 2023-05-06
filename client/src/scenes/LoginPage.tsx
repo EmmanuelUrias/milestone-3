@@ -7,10 +7,10 @@ import { setLogin } from '../ducks/userSlice'
 const LoginPage = () => {
   const [isToRegister, setIsToRegister] = useState(true)
   const smallScreen = useMediaQuery('(min-width: 800px)')
-  const [message, setMessage] = useState('')
-  const [user_name, setUser_name] = useState('')
-  const [password, setPassword] = useState('')
-  const [email, setEmail] = useState('')
+  const [message, setMessage] = useState("")
+  const [user_name, setUser_name] = useState("")
+  const [password, setPassword] = useState("")
+  const [email, setEmail] = useState("")
   const [budget, setBudget] = useState(0)
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -31,6 +31,8 @@ const LoginPage = () => {
       },
       body: JSON.stringify(user)
     })
+
+    console.log(user)
 
     if(newUserRes.ok) {
       setIsToRegister(false)
