@@ -15,7 +15,6 @@ const Navbar = () => {
     const [isMobileNavMenuToggled, setIsMobileNavMenuToggled] = useState(false)
     const dispatch = useDispatch()
     const userJson = useSelector((state: RootState) => state.userAuthAndInfo.user)
-    console.log(userJson)
     const user = JSON.parse(userJson as unknown as string)
     const navigate = useNavigate()
     
@@ -37,6 +36,8 @@ const Navbar = () => {
     const handleNavigate = (event: Event | React.SyntheticEvent) => {
       navigate(`/account/${user.user_id}`)
     }
+
+    // Some of this code comes from Material UI's documentation including 42-51
   
     const handleClose = (event: Event | React.SyntheticEvent) => {
       if (

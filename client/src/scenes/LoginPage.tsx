@@ -32,8 +32,6 @@ const LoginPage = () => {
       body: JSON.stringify(user)
     })
 
-    console.log(user)
-
     if(newUserRes.ok) {
       setIsToRegister(false)
     } else {

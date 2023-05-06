@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react'
 import Navbar from './components/Navbar'
 import { useSelector, useDispatch } from 'react-redux'
-import { setLogin, setLogout } from './ducks/userSlice'
+import { setLogin } from './ducks/userSlice'
 import { RootState } from './store'
 import HomePage from './scenes/HomePage'
 import './App.css'
@@ -13,7 +12,6 @@ import { User } from './ducks/userSlice'
 import EditOrDeleteAccountPage from './scenes/EditOrDeleteAccountPage'
 
 function App() {
-  const user = useSelector((state: RootState) => state.userAuthAndInfo.user)
   const dispatch = useDispatch()
   const isLoggedIn = Boolean(useSelector((state: RootState) => state.userAuthAndInfo.token))
 
