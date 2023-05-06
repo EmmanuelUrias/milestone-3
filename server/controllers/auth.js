@@ -12,7 +12,6 @@ const register = async (req, res) => {
             email,
             budget
             } = req.body
-            console.log(password, email)
 
         const salt = await bcrypt.genSalt()
         const passWordHash = await bcrypt.hash(password, salt)
@@ -28,8 +27,8 @@ const register = async (req, res) => {
             password: passWordHash,
             email,
             budget,
-            time_stamp: new Date(),
-            createdAt: new Date()
+            time_stamp: new Date,
+            createdAt: new Date
         })
         
         res.status(200).json({

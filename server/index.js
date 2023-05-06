@@ -7,7 +7,7 @@ const authRoutes = require('./routes/auth.js')
 const userRoutes = require('./routes/user.js')
 const goalRoutes = require('./routes/goal')
 const expenseRoutes = require('./routes/expense')
-const path = require('path')
+//const path = require('path')
 
 // Middleware
 dotenv.config()
@@ -20,9 +20,9 @@ app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
-if(process.env.NODE_ENV == 'production') {
-    app.use(express.static(path.join(__dirname, 'client', 'build')))
-}
+// if(process.env.NODE_ENV == 'production') {
+//     app.use(express.static(path.join(__dirname, 'client', 'build')))
+// }
 
 //Routes 
 app.use('/auth', authRoutes)
