@@ -27,8 +27,8 @@ const register = async (req, res) => {
             password: passWordHash,
             email,
             budget,
-            time_stamp: new Date,
-            createdAt: new Date
+            time_stamp: new Date(),
+            createdAt: new Date()
         })
         
         res.status(200).json({

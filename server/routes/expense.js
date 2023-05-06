@@ -1,5 +1,5 @@
 const express = require('express')
-const { getExpenses, getThisMonthsExpenses, newExpense, updateExpense, deleteExpense } = require('../controllers/expense')
+const { getThisMonthsExpenses, newExpense, updateExpense, deleteExpense } = require('../controllers/expense')
 const { tokenVerification } = require('../middleware/auth')
 
 const router = express.Router()

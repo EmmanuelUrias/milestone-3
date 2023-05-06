@@ -1,5 +1,5 @@
 const express = require('express')
-const { newGoal, findGoals, findGoal, updateGoal, deleteGoal } = require('../controllers/goal')
+const { newGoal, findGoal, updateGoal, deleteGoal } = require('../controllers/goal')
 const { tokenVerification } = require('../middleware/auth')
 
 const router = express.Router()
